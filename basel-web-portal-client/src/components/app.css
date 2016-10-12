@@ -1,0 +1,35 @@
+.bslSideBarMenuContainer {
+  float: left;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.bslSideBarMenuContainer :global(.panel-body) {
+	padding: 0px;
+}
+
+.bslSideBarMenuContainer :global(.btn-group-vertical) {
+	width: 100%;
+}
+
+.bslSideBarMenuContainer :global(.btn-group-vertical) > button {
+    border-radius: 0px !important;
+}
+
+.bslSideBarMenuContainer  :global(.panel-body) :global(.table) {
+	margin-bottom: 0px;
+}
+
+.bslSideBarMenuContainer  :global(.panel) {
+	border-radius: 0px;
+	margin-top: 0px;
+}
+
+.bslSideBarMenuContainer  :global(.panel-group) :global( .panel+.panel){
+	margin-top: 0px;
+}
+
+.bslSideBarMenuContainer  :global(.panel-heading){
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
