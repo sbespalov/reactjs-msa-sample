@@ -16,3 +16,4 @@ hs_err_pid*
 .tern_project
 node_modules
 dist
+.metadata
