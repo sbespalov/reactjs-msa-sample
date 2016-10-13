@@ -1,10 +1,28 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styles from './app.css';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
 import { hashHistory } from 'react-router'
 
 export default React.createClass( {
+
+    addOnClickNavigation: function( component, route ) {
+        if (component.onClickNavigation){
+            return;
+        }
+        component.onClickNavigation = () => {
+            hashHistory.push( route );
+        }
+        var element = ReactDOM.findDOMNode( component );
+        element.addEventListener( 'click', ( evt ) => {
+            component.onClickNavigation();
+        }, false );
+    },
+
     render: function() {
+
+        var componentInstance = this;
+
         return <div className={styles.bslPageContainer}>
             <div className={styles.bslSideBarMenuContainer}>
                 <Navbar fluid className={styles.sidebar}>
@@ -22,8 +40,8 @@ export default React.createClass( {
                             <Navbar.Link href="#/logout"><Glyphicon glyph="log-out"/></Navbar.Link>
                         </Navbar.Text>
                         <Nav>
-                            <NavDropdown eventKey={1} title="Monitoring" id="basic-nav-dropdown" onSelect={()=>{hashHistory.push('/monitoring')}}>
-                                <MenuItem eventKey={1.1}>Action</MenuItem>
+                            <NavDropdown eventKey={1} title="Monitoring" id="basic-nav-dropdown" ref={( c ) => { c ? componentInstance.addOnClickNavigation( c, '/monitoring' ) : {}; } }>
+                                <MenuItem eventKey={1.1} href="#/security-recalculate">Security recalculate</MenuItem>
                             </NavDropdown>
                             <NavItem eventKey={2}>Reports</NavItem>
                             <NavItem eventKey={3}>References</NavItem>

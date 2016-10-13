@@ -4,17 +4,14 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
-import App from './components/App';
-import BaselMainPage from './components/BaselMainPage';
-import MonitoringPage from './components/MonitoringPage';
+import routes from './components/Routes'
 
 const store = createStore( reducer );
 
-
-const routes = <Route path="/" component={App}>
-    <IndexRoute component={BaselMainPage}/>
-    <Route path="/monitoring" component={MonitoringPage} />
-</Route>;
+//const routes = <Route path="/" component={App}>
+//<IndexRoute component={HomePage}/>
+//<Route path="/monitoring" component={MonitoringPage} />
+//</Route>;
 
 ReactDOM.render(
     <Provider store={store}>
