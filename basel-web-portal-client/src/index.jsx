@@ -11,7 +11,7 @@ const store = createStore( reducer );
 store.dispatch( {
     type: 'SET_STATE',
     state: {
-        activeMenuItemKey: 1.1
+        activeMenuItemKey: 1
     }
 });
 
