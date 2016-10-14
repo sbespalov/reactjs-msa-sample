@@ -6,6 +6,14 @@ import { hashHistory } from 'react-router'
 
 export default React.createClass( {
 
+    getActiveMenuItemKey: function() {
+        return this.props.activeMenuItemKey || 1;
+    },
+    
+    onSelect: function(activeMenuItemKey){
+        this.props.onMenuItemSelect(activeMenuItemKey);
+    },
+    
     addOnClickNavigation: function( component, route ) {
         if ( component.onClickNavigation ) {
             return;
@@ -24,7 +32,7 @@ export default React.createClass( {
         var componentInstance = this;
 
         return <div id="sidebar-menu" className={styles.bslSideBarMenuContainer}>
-            <Navbar fluid className={styles.sidebar} inverse >
+            <Navbar fluid className={styles.sidebar} >
 
                 <Navbar.Header>
                     <Navbar.Brand>
@@ -38,7 +46,7 @@ export default React.createClass( {
                         <Navbar.Link href="#/"><Glyphicon glyph="home"/></Navbar.Link>
                         <Navbar.Link href="#/logout"><Glyphicon glyph="log-out"/></Navbar.Link>
                     </Navbar.Text>
-                    <Nav>
+                    <Nav activeKey={this.getActiveMenuItemKey()} onSelect={this.onSelect}>
                         <NavDropdown eventKey={1} title="Monitoring" id="basic-nav-dropdown" ref={( targetComponent ) => { targetComponent ? componentInstance.addOnClickNavigation( targetComponent, '/monitoring' ) : {}; } }>
                             <MenuItem eventKey={1.1} href="#/security-recalculate">Security recalculate</MenuItem>
                         </NavDropdown>

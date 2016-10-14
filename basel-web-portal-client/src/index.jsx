@@ -8,10 +8,13 @@ import routes from './components/Routes'
 
 const store = createStore( reducer );
 
-//const routes = <Route path="/" component={App}>
-//<IndexRoute component={HomePage}/>
-//<Route path="/monitoring" component={MonitoringPage} />
-//</Route>;
+store.dispatch( {
+    type: 'SET_STATE',
+    state: {
+        activeMenuItemKey: 1.1
+    }
+});
+
 
 ReactDOM.render(
     <Provider store={store}>
