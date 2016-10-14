@@ -14,4 +14,5 @@ export default React.createClass( {
             <div className={styles.bslPageContent + ' ' + styles.main}>{this.props.children}</div>
         </div>;
     }
+
 });
