@@ -58,8 +58,8 @@ export default React.createClass( {
                                 Security recalculate
                             </MenuItem>
                         </NavDropdown>
-                        <NavItem eventKey={'2'}>Reports</NavItem>
-                        <NavItem eventKey={'3'}>References</NavItem>
+                        <NavItem eventKey={'2'} href="#/reports">Reports</NavItem>
+                        <NavItem eventKey={'3'} href="#/referencies">References</NavItem>
                     </Nav>
                 </Navbar.Collapse>
 

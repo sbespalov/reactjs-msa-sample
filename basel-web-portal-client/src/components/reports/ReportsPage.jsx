@@ -5,7 +5,7 @@ import {PageHeader} from 'react-bootstrap';
 export default React.createClass( {
 
     render: function() {
-        return <PageHeader>Referencies</PageHeader>;
+        return <PageHeader>Reports</PageHeader>;
     }
 
 });

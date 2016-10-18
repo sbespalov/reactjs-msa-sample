@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var extractModuleCss = new ExtractTextPlugin('styles.css');
 var extractGlobalCss = new ExtractTextPlugin('global.css');
-var htmlWebpackPlugin = new HtmlWebpackPlugin({
+var html = new HtmlWebpackPlugin({
     template : 'src/index.template.ejs',
     inject : 'body',
 });
@@ -23,7 +23,6 @@ module.exports = {
                 },
                 {
                     test : /\.module\.css$/,
-                    exclude : /node_modules/,
                     loader : extractModuleCss.extract('style-loader',
                             combineLoaders([ {
                                 loader : 'css-loader',
@@ -43,7 +42,7 @@ module.exports = {
     resolve : {
         extensions : [ '', '.js', '.jsx', '.css', '.ejs','.png','.woff','.woff2','.eot','.ttf','.svg' ]
     },
-    plugins : [ extractModuleCss, extractGlobalCss, htmlWebpackPlugin ],
+    plugins : [ extractModuleCss, extractGlobalCss, html ],
     output : {
         path : __dirname + '/dist',
         publicPath : '/',

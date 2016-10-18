@@ -11,7 +11,6 @@ export default function(state = Map(), action) {
             return setState(state, action.state);
         case 'SET_ACTIVE_MAIN_MENU_ITEM':
             return state.set('activeMenuItemKey', action.activeMenuItemKey);
-            
         default:
             return state;
     }

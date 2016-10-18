@@ -12,7 +12,39 @@ const store = createStore( reducer );
 store.dispatch( {
     type: 'SET_STATE',
     state: {
-        activeMenuItemKey: '1'
+        activeMenuItemKey: '1',
+        pages: {
+            securityRecalculatePage: {
+                recalculateResultData: [
+                    {
+                        date: new Date(),
+                        security: 'Security',
+                        bcd: 'Bid Calculate Detail',
+                        acd: 'Ask Calculate Detail'
+                    },
+                    {
+                        date: new Date(),
+                        security: 'Security',
+                        bcd: 'Bid Calculate Detail',
+                        acd: 'Ask Calculate Detail'
+                    }, {
+                        date: new Date(),
+                        security: 'Security',
+                        bcd: 'Bid Calculate Detail',
+                        acd: 'Ask Calculate Detail'
+                    }, {
+                        date: new Date(),
+                        security: 'Security',
+                        bcd: 'Bid Calculate Detail',
+                        acd: 'Ask Calculate Detail'
+                    }, {
+                        date: new Date(),
+                        security: 'Security',
+                        bcd: 'Bid Calculate Detail',
+                        acd: 'Ask Calculate Detail'
+                    }]
+            }
+        }
     }
 });
 
