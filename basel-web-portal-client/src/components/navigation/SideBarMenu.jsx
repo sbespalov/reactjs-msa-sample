@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from './sideBarMenu.css';
+import styles from './sideBarMenu.module.css';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
 import { hashHistory } from 'react-router'
 

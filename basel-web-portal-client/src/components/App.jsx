@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import styles from './app.css';
+import styles from './app.module.css';
 import SideBarMenu from './navigation/SideBarMenu';
 import * as actionCreators from '../action_creators';
 

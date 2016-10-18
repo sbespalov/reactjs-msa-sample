@@ -22,8 +22,10 @@
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-combine-loaders": "^2.0.0",
     "webpack-dev-server": "^1.16.1"
