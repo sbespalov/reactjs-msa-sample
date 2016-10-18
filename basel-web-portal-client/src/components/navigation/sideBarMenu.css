@@ -125,7 +125,6 @@ nav.sidebar {
 nav.sidebar :global(.navbar-nav) :global(.open) :global(.dropdown-menu)>li>a:hover, nav.sidebar :global(.navbar-nav) :global(.open) :global(.dropdown-menu)>li>a:focus
 	{
 	color: #CCC;
-	background-color: transparent;
 }
 
 nav:hover :global(.forAnimate) {

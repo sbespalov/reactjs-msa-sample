@@ -7,13 +7,13 @@ import { hashHistory } from 'react-router'
 export default React.createClass( {
 
     getActiveMenuItemKey: function() {
-        return this.props.activeMenuItemKey || 1;
+        return this.props.activeMenuItemKey || '1';
     },
-    
-    onSelect: function(activeMenuItemKey){
-        this.props.onMenuItemSelect(activeMenuItemKey);
+
+    onSelect: function( activeMenuItemKey ) {
+        this.props.onMenuItemSelect( activeMenuItemKey );
     },
-    
+
     addOnClickNavigation: function( component, route ) {
         if ( component.onClickNavigation ) {
             return;
@@ -24,13 +24,13 @@ export default React.createClass( {
         var element = ReactDOM.findDOMNode( component );
         element.addEventListener( 'click', ( evt ) => {
             component.onClickNavigation();
+            this.onSelect( component.props.eventKey );
         }, false );
     },
 
     render: function() {
 
         var componentInstance = this;
-
         return <div id="sidebar-menu" className={styles.bslSideBarMenuContainer}>
             <Navbar fluid className={styles.sidebar} >
 
@@ -46,17 +46,25 @@ export default React.createClass( {
                         <Navbar.Link href="#/"><Glyphicon glyph="home"/></Navbar.Link>
                         <Navbar.Link href="#/logout"><Glyphicon glyph="log-out"/></Navbar.Link>
                     </Navbar.Text>
-                    <Nav activeKey={this.getActiveMenuItemKey()} onSelect={this.onSelect}>
-                        <NavDropdown eventKey={1} title="Monitoring" id="basic-nav-dropdown" ref={( targetComponent ) => { targetComponent ? componentInstance.addOnClickNavigation( targetComponent, '/monitoring' ) : {}; } }>
-                            <MenuItem eventKey={1.1} href="#/security-recalculate">Security recalculate</MenuItem>
+                    <Nav activeKey={this.getActiveMenuItemKey() } onSelect={this.onSelect}>
+                        <NavDropdown
+                            eventKey={'1'}
+                            title="Monitoring"
+                            id="basic-nav-dropdown"
+                            role="menuitem"
+                            open={this.getActiveMenuItemKey().startsWith( '1' ) }
+                            ref={( targetComponent ) => { targetComponent && componentInstance.addOnClickNavigation( targetComponent, '/monitoring' ) } }>
+                            <MenuItem eventKey={'1.1'} href="#/security-recalculate">
+                                Security recalculate
+                            </MenuItem>
                         </NavDropdown>
-                        <NavItem eventKey={2}>Reports</NavItem>
-                        <NavItem eventKey={3}>References</NavItem>
+                        <NavItem eventKey={'2'}>Reports</NavItem>
+                        <NavItem eventKey={'3'}>References</NavItem>
                     </Nav>
                 </Navbar.Collapse>
 
             </Navbar>
         </div>;
     }
-    
+
 });
