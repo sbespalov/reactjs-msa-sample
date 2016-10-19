@@ -6,7 +6,7 @@
 
 Установщик можно скачать [тут](https://nodejs.org/en/download/)
 
-После установки в папке "basel-web-portal-client" выполнить комманды:
+После установки в папке `basel-web-portal-client` выполнить комманды:
 
 ```
 npm install -g webpack webpack-dev-server
