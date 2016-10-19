@@ -12,7 +12,10 @@ const App = React.createClass( {
         var componentInstance = this;
 
         return <div className={styles.bslPageContainer}>
-            <SideBarMenu activeMenuItemKey={this.props.activeMenuItemKey} onMenuItemSelect={this.props.setActiveMenuItemKey}/>
+            <SideBarMenu
+                activeMenuItemKey={this.props.activeMenuItemKey}
+                onMenuItemSelect={this.props.setActiveMenuItemKey}
+                navItems={this.props.navItems}/>
             <div className={styles.bslPageContent + ' ' + styles.main}>{this.props.children}</div>
         </div>;
     }
@@ -21,7 +24,8 @@ const App = React.createClass( {
 
 function mapStateToProps( state ) {
     return {
-        activeMenuItemKey: state.get( 'activeMenuItemKey' )
+        activeMenuItemKey: state.get( 'activeMenuItemKey' ),
+        navItems: state.get( 'navItems' )
     };
 }
 

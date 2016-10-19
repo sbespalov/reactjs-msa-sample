@@ -13,6 +13,26 @@ store.dispatch( {
     type: 'SET_STATE',
     state: {
         activeMenuItemKey: '1',
+        navItems:
+        [{
+            id: '1',
+            title: 'Monitoring',
+            location: '/monitoring',
+            items: [{
+                id: '1.1',
+                title: 'Security recalculate',
+                location: '/security-recalculate'
+            }]
+        }, {
+                id: '2',
+                title: 'Report',
+                location: '/reports'
+            }, {
+                id: '3',
+                title: 'References',
+                location: '/referencies'
+            }]
+        ,
         pages: {
             securityRecalculatePage: {
                 recalculateResultData: [
@@ -55,3 +75,17 @@ ReactDOM.render(
     </Provider>,
     document.getElementById( 'app' )
 );
+
+//<NavDropdown
+//eventKey={'1'}
+//title="Monitoring"
+//id="basic-nav-dropdown"
+//role="menuitem"
+//open={this.getActiveMenuItemKey().startsWith( '1' ) }
+//ref={( targetComponent ) => { targetComponent && componentInstance.addOnClickNavigation( targetComponent, '/monitoring' ) } }>
+//<MenuItem eventKey={'1.1'} href="#/security-recalculate">
+//Security recalculate
+//</MenuItem>
+//</NavDropdown>
+//<NavItem eventKey={'2'} href="#/reports">Reports</NavItem>
+//<NavItem eventKey={'3'} href="#/referencies">References</NavItem>
