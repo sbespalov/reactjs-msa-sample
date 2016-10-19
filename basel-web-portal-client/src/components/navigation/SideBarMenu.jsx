@@ -7,7 +7,7 @@ import { hashHistory } from 'react-router'
 export default React.createClass( {
 
     getActiveMenuItemKey: function() {
-        return this.props.activeMenuItemKey || '1';
+        return this.props.activeMenuItemKey;
     },
 
     onSelect: function( activeMenuItemKey ) {
@@ -38,7 +38,7 @@ export default React.createClass( {
                 eventKey={navItem.get('id')}
                 title={navItem.get('title')}
                 role="menuitem"
-                open={this.getActiveMenuItemKey().startsWith( navItem.get('id') ) }
+                open={this.getActiveMenuItemKey() && this.getActiveMenuItemKey().startsWith( navItem.get('id') ) }
                 ref={( targetComponent ) => { targetComponent && componentInstance.addOnClickNavigation( targetComponent, navItem.get('location') ) } }>
                     {
                         navItem.get('items').map( (subItem) => {
@@ -59,7 +59,7 @@ export default React.createClass( {
 
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">Ф.Киркоров </a>
+                        <a href="/">Ф.Киркоров</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
