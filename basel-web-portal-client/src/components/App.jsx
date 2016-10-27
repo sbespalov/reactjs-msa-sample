@@ -23,9 +23,10 @@ const App = React.createClass( {
 });
 
 function mapStateToProps( state ) {
+    var state = state.navigation;
     return {
-        activeMenuItemKey: state.get( 'activeMenuItemKey' ),
-        navItems: state.get( 'navItems' )
+        activeMenuItemKey: state.get('activeMenuItemKey' ),
+        navItems: state.get('navItems' )
     };
 }
 

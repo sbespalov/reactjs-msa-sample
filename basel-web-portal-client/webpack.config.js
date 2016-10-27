@@ -8,6 +8,7 @@ var html = new HtmlWebpackPlugin({
     template : 'src/index.template.ejs',
     inject : 'body',
 });
+
 module.exports = {
     entry : [ './src/index.jsx' ],
     module : {
@@ -32,7 +33,6 @@ module.exports = {
                                 }
                             } ]))
                 },
-                // Global CSS
                 {
                     test : /\.css$/,
                     exclude : /\.module\.css$/,
@@ -49,6 +49,7 @@ module.exports = {
         filename : 'bundle.js'
     },
     devServer : {
-        contentBase : './dist'
+        contentBase : './dist',
+        headers: { "Access-Control-Allow-Origin": "*" }
     }
 };

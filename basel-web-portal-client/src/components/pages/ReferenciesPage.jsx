@@ -2,10 +2,10 @@ import React from 'react';
 import {PageHeader} from 'react-bootstrap';
 
 
-export default React.createClass( {
+export const ReferenciesPage = React.createClass( {
 
     render: function() {
-        return <PageHeader>Reports</PageHeader>;
+        return <PageHeader>Referencies</PageHeader>;
     }
 
 });

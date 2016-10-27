@@ -1,124 +1,91 @@
+import styles from '../lib/bootstrap-3.3.7/css/bootstrap.css';
+import appStyles from './styles/app.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
-import {createStore} from 'redux';
+
+import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import reducer from './reducer';
+import thunk from 'redux-thunk';
+
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
+import { Observable } from 'rxjs'
+
+import observe from './reduxStoreObserver';
+
+import $ from "jquery";
+
+import preloadedState from './state.jsx'
+
+import reducer from './reducers/index';
+import remoteActionMiddleware from './remote_action_middleware';
+import navItems from './components/navigation/navItems'
 import routes from './components/Routes'
-import styles from '../lib/bootstrap-3.3.7/css/bootstrap.css';
 
-const store = createStore( reducer );
+import * as actionCreators from './action_creators';
 
-store.dispatch( {
-    type: 'SET_STATE',
-    state: {
-        navItems:
-        [
-            {
-                id: '1',
-                title: 'Monitoring',
-                location: '/monitoring',
-                items: [
-                    {
-                        id: '1.1',
-                        title: 'Security recalculate',
-                        location: '/security-recalculate'
-                    },
-                    {
-                        id: '1.2',
-                        title: 'Sub Item 2',
-                        location: '/si2'
-                    },
-                    {
-                        id: '1.3',
-                        title: 'Sub Item 3',
-                        location: '/si3'
-                    }]
-            },
-            {
-                id: '2',
-                title: 'Report',
-                location: '/reports'
-            }, {
-                id: '4',
-                title: 'Item 4',
-                location: '/monitoring',
-                items: [
-                    {
-                        id: '4.1',
-                        title: 'Sub Item 1',
-                        location: '/si1'
-                    },
-                    {
-                        id: '4.2',
-                        title: 'Sub Item 2',
-                        location: '/si2'
-                    },
-                    {
-                        id: '4.3',
-                        title: 'Sub Item 3',
-                        location: '/si3'
-                    }]
-            },
-            {
-                id: '4',
-                title: 'References',
-                location: '/referencies'
-            }]
-        ,
-        pages: {
-            securityRecalculatePage: {
-                recalculateResultData: [
-                    {
-                        date: new Date(),
-                        security: 'Security',
-                        bcd: 'Bid Calculate Detail',
-                        acd: 'Ask Calculate Detail'
-                    },
-                    {
-                        date: new Date(),
-                        security: 'Security',
-                        bcd: 'Bid Calculate Detail',
-                        acd: 'Ask Calculate Detail'
-                    }, {
-                        date: new Date(),
-                        security: 'Security',
-                        bcd: 'Bid Calculate Detail',
-                        acd: 'Ask Calculate Detail'
-                    }, {
-                        date: new Date(),
-                        security: 'Security',
-                        bcd: 'Bid Calculate Detail',
-                        acd: 'Ask Calculate Detail'
-                    }, {
-                        date: new Date(),
-                        security: 'Security',
-                        bcd: 'Bid Calculate Detail',
-                        acd: 'Ask Calculate Detail'
-                    }]
-            }
-        }
-    }
+//const createStoreWithMiddleware = applyMiddleware(
+//    thunk.withExtraArgument( { $ })
+//)( createStore );
+
+//const store = createStore(
+//        rootReducer,
+//        applyMiddleware(thunk)
+//      );
+
+//const store = createStoreWithMiddleware( combineReducers( { reducer, routerReducer }) );
+
+const configureStore = function( store ) {
+    observe( store,
+        //if THIS changes, we the CALLBACK will be called
+        state => state.routing.locationBeforeTransitions.pathname,
+        ( store, previousValue, currentValue ) => console.log( 'Some property changed from ', previousValue, 'to', currentValue )
+    );
+};
+
+const observableFromStore = function( store ) {
+    return Observable.create( observer =>
+        store.subscribe(() => observer.next( store.getState() ) )
+    )
+};
+
+const store = createStore(
+    reducer,
+    preloadedState,
+    applyMiddleware( thunk.withExtraArgument( { $ }) )
+);
+
+var state$ = observableFromStore(store);
+
+const navChanged$ = state$
+    .map(state => state.routing.locationBeforeTransitions.pathname )
+    .distinctUntilChanged()
+    .filter(pathname => pathname === '/security-recalculate');
+
+navChanged$.subscribe( (val)=>{
+    console.log( 'Some property changed ' + val);
+    store.dispatch(actionCreators.remoteFindRecalculationResultList());
 });
 
+const history = syncHistoryWithStore( hashHistory, store )
+
+//function mixStoreToRoutes( routes ) {
+//    return routes && routes.map( route => ( {
+//        ...route,
+//        childRoutes: mixStoreToRoutes( route.childRoutes ),
+//        onEnter: route.onEnter && function( props, replaceState, cb ) {
+//            route.onEnter( store.dispatch, props )
+//                .then(() => cb( null ) )
+//                .catch( cb );
+//        }
+//    }));
+//};
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={hashHistory}>{routes}</Router>
+        <Router history={history}>{routes}</Router>
     </Provider>,
     document.getElementById( 'app' )
 );
-
-//<NavDropdown
-//eventKey={'1'}
-//title="Monitoring"
-//id="basic-nav-dropdown"
-//role="menuitem"
-//open={this.getActiveMenuItemKey().startsWith( '1' ) }
-//ref={( targetComponent ) => { targetComponent && componentInstance.addOnClickNavigation( targetComponent, '/monitoring' ) } }>
-//<MenuItem eventKey={'1.1'} href="#/security-recalculate">
-//Security recalculate
-//</MenuItem>
-//</NavDropdown>
-//<NavItem eventKey={'2'} href="#/reports">Reports</NavItem>
-//<NavItem eventKey={'3'} href="#/referencies">References</NavItem>

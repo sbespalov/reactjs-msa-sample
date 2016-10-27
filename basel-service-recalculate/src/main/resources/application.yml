@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: recalculation-service
+#  cloud:
+#    config:
+#      uri: http://config:8888
+#      fail-fast: true
+#      password: ${CONFIG_SERVICE_PASSWORD}
+#      username: user
+  h2:
+    console:
+      enabled: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps:  false    
+      
+server: 
+  port: 8085
+
+    
+  
