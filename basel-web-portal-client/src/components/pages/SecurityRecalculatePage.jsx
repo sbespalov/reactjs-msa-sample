@@ -3,12 +3,8 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {PageHeader, Table} from 'react-bootstrap';
 import $ from 'jquery';
-//import Loading from 'jquery-easy-loading';
 import "jquery-loading-1.2.0/jquery.loading";
 import "jquery-loading-1.2.0/jquery.loading.css";
-
-//import "jquery-loading-overlay-1.4.1/loadingoverlay";
-
 import * as actionCreators from 'action_creators';
 import {observableFromStore} from 'reduxStoreObserver';
 
