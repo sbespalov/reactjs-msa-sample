@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from './sideBarMenu.module.css';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
 import { hashHistory } from 'react-router'
+import styles from 'components/navigation/sideBarMenu.module.css';
 
 export default React.createClass( {
 

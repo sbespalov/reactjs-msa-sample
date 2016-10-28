@@ -1,30 +1,62 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {PageHeader, Table} from 'react-bootstrap';
-import * as actionCreators from '../../action_creators';
-import {observableFromStore} from '../../reduxStoreObserver';
+import $ from 'jquery';
+//import Loading from 'jquery-easy-loading';
+import "jquery-loading-1.2.0/jquery.loading";
+import "jquery-loading-1.2.0/jquery.loading.css";
 
-const SecurityRecalculatePageComponent = React.createClass( {
+//import "jquery-loading-overlay-1.4.1/loadingoverlay";
 
-    getRecalculateResultData: function() {
-        return this.props.recalculateResultListData || [];
-    },
+import * as actionCreators from 'action_creators';
+import {observableFromStore} from 'reduxStoreObserver';
 
-    getIsLoading: function() {
-        return this.props.loading || false;
-    },
+class SecurityRecalculatePageComponent extends React.Component {
 
-    render: function() {
-        //this.props.remoteFindRecalculationResultList();
+    constructor( props, context ) {
+        super( props, context );
+        console.log('#Constructor');
+    }
+
+    componentDidMount() {
+        console.log('#Mount');
         if ( this.getIsLoading() ) {
-            return <div>
-                <PageHeader>Security Recalculate</PageHeader>
-                <span className="glyphicon glyphicon-refresh glyphicon-spin"></span>
-            </div>
+            $( this.getRecalculateResultTableElement() ).loading();
         }
+        this.props.remoteFindRecalculationResultList();
+    }
+
+    componentWillUnmount() {
+        console.log('#UnMount');
+        $( this.getRecalculateResultTableElement() ).loading( 'stop' );
+    }
+
+    componentDidUpdate() {
+        console.log('#Update');
+        if ( this.getIsLoading() ) {
+            $( this.getRecalculateResultTableElement() ).loading();
+        } else {
+            $( this.getRecalculateResultTableElement() ).loading( 'stop' );
+        }
+    }
+
+    getRecalculateResultTableElement() {
+        return ReactDOM.findDOMNode( this.refs.recalculateResultTable );
+    }
+
+    getRecalculateResultData() {
+        return this.props.recalculateResultListData || [];
+    }
+
+    getIsLoading() {
+        return this.props.loading || false;
+    }
+
+    render() {
         return <div>
             <PageHeader>Security Recalculate</PageHeader>
-            <Table responsive striped condensed hover>
+            <Table responsive striped condensed hover ref="recalculateResultTable">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -49,27 +81,17 @@ const SecurityRecalculatePageComponent = React.createClass( {
         </div>;
     }
 
-});
+}
 
-var navChanged$
+SecurityRecalculatePageComponent.contextTypes = {
+    store: React.PropTypes.object
+}
 
 function mapStateToProps( state ) {
-    //    if ( !navChanged$ ) {
-    //        navChanged$ = state$
-    //            .map(state => state.routing.locationBeforeTransitions.pathname )
-    //            .distinctUntilChanged()
-    //            .filter(pathname => pathname === '/security-recalculate');
-    //        
-    //        navChanged$.subscribe( (val)=>{
-    //            console.log( 'Some property changed ' + val);
-    //            store.dispatch(actionCreators.remoteFindRecalculationResultList());
-    //        });        
-    //        
-    //    }
     state = state.securityRecalculate;
     return {
-        recalculateResultListData: state.getIn( ['securityRecalculate', 'recalculationResultList', 'data'] ),
-        loading: state.getIn( ['securityRecalculate', 'recalculationResultList', 'loading'] )
+        recalculateResultListData: state.getIn( ['recalculationResultList', 'data'] ),
+        loading: state.getIn( ['recalculationResultList', 'loading'] )
     };
 }
 

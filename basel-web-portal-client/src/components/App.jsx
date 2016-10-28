@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import styles from './app.module.css';
 import SideBarMenu from './navigation/SideBarMenu';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from 'action_creators';
 
 const App = React.createClass( {
 

@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import AppContext from './AppContext';
 
 export function setActiveMenuItemKey(activeMenuItemKey){
     return {
@@ -9,16 +10,22 @@ export function setActiveMenuItemKey(activeMenuItemKey){
 
 export function remoteFindRecalculationResultList(filter) {
     return function (dispatch, getState, {$}) {
-        dispatch(remoteFindRecalculationResultListRequest());
+        if (getState().securityRecalculate.getIn( ['recalculationResultList', 'loading'])){
+            return;
+        }
+        console.log('Request');
+        dispatch(remoteFindRecalculationResultListRequest(filter));
         $.get("http://localhost:8085/recalculation/findRecalculationResultList", function(data, status){
+            console.log('Response');
             dispatch(remoteFindRecalculationResultListResponse(Immutable.fromJS(data.recalculationResultList)));
         });
     };
 }
 
-export function remoteFindRecalculationResultListRequest() {
+export function remoteFindRecalculationResultListRequest(filter) {
     return {
-      type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_REQUEST'
+      type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_REQUEST',
+      filter
     };
 }
 

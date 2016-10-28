@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router, Route, IndexRoute} from 'react-router';
-import App from './App';
-import * as page from './pages/index';
+import App from 'components/App';
+import * as page from 'components/pages/index';
 
 var bbb = page.HomePage;
 

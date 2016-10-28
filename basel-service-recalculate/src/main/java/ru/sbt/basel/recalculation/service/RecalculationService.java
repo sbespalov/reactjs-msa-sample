@@ -15,14 +15,38 @@ public class RecalculationService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	public List<RecalculationResultDto> findRecalculationResultList() {
-		
+
 		jdbcTemplate.execute("select 1 from dual");
-		
+
 		List<RecalculationResultDto> result = new ArrayList<>();
 
 		RecalculationResultDto item = new RecalculationResultDto();
+		result.add(item);
+
+		item.setAskCalculateDetail("askCalculateDetail");
+		item.setBidCalculateResult("bidCalculateResult");
+		item.setDate(new Date());
+		item.setSecurity("security");
+
+		item = new RecalculationResultDto();
+		result.add(item);
+
+		item.setAskCalculateDetail("askCalculateDetail");
+		item.setBidCalculateResult("bidCalculateResult");
+		item.setDate(new Date());
+		item.setSecurity("security");
+
+		item = new RecalculationResultDto();
+		result.add(item);
+
+		item.setAskCalculateDetail("askCalculateDetail");
+		item.setBidCalculateResult("bidCalculateResult");
+		item.setDate(new Date());
+		item.setSecurity("security");
+
+		item = new RecalculationResultDto();
 		result.add(item);
 
 		item.setAskCalculateDetail("askCalculateDetail");

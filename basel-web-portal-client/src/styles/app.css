@@ -1,4 +1,14 @@
 .glyphicon-spin {
-    -webkit-animation: spin 1000ms infinite linear;
-    animation: spin 1000ms infinite linear;
+	-webkit-animation: spin 1000ms infinite linear;
+	animation: spin 1000ms infinite linear;
+}
+
+.commonLoadingContainer {
+	width: 100%;
+	text-align: center;
+/* 	background-color: #f5f5f5; */
+}
+
+.commonLoadingContainer .glyphicon-time {
+	font-size: 30px;
 }

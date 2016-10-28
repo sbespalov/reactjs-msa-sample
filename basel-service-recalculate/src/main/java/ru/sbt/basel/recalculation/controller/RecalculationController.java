@@ -27,7 +27,7 @@ public class RecalculationController implements RecalculationServiceApi {
 	public BslFindRecalculationResultListResponse findRecalculationResultList(
 			BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest) {
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

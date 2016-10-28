@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import navItems from './components/navigation/navItems';
+import navItems from 'components/navigation/navItems';
 
 export default {
     navigation: Immutable.fromJS( {
@@ -35,7 +35,7 @@ export default {
                     bcd: 'Bid Calculate Detail',
                     acd: 'Ask Calculate Detail'
                 }],
-            loading: true
+            loading: false
         }
     })
 };

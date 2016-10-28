@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var combineLoaders = require('webpack-combine-loaders');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,6 +13,13 @@ var html = new HtmlWebpackPlugin({
 
 module.exports = {
     entry : [ './src/index.jsx' ],
+    output : {
+        path : __dirname + '/dist',
+        publicPath : '/',
+        filename : 'bundle.js',
+        library : "AppContext",
+        libraryTarget : "var"
+    },
     module : {
         loaders : [
                 {
@@ -36,20 +45,24 @@ module.exports = {
                 {
                     test : /\.css$/,
                     exclude : /\.module\.css$/,
-                    loader : extractGlobalCss.extract('style-loader','css-loader')
+                    loader : extractGlobalCss.extract('style-loader',
+                            'css-loader')
                 } ]
     },
     resolve : {
-        extensions : [ '', '.js', '.jsx', '.css', '.ejs','.png','.woff','.woff2','.eot','.ttf','.svg' ]
+        extensions : [ '', '.js', '.jsx', '.css', '.ejs', '.png', '.woff',
+                '.woff2', '.eot', '.ttf', '.svg' ],
+        root : [ path.resolve('./src'), path.resolve('./lib') ]
     },
-    plugins : [ extractModuleCss, extractGlobalCss, html ],
-    output : {
-        path : __dirname + '/dist',
-        publicPath : '/',
-        filename : 'bundle.js'
-    },
+    plugins : [ extractModuleCss, extractGlobalCss, html,
+            new webpack.ProvidePlugin({
+                $ : "jquery",
+                jQuery : "jquery"
+            }) ],
     devServer : {
         contentBase : './dist',
-        headers: { "Access-Control-Allow-Origin": "*" }
+        headers : {
+            "Access-Control-Allow-Origin" : "*"
+        }
     }
 };
