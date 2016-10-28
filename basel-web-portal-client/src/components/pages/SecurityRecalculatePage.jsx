@@ -5,7 +5,6 @@ import {PageHeader, Table} from 'react-bootstrap';
 import $ from 'jquery';
 import "jquery-loading-1.2.0/jquery.loading";
 import "jquery-loading-1.2.0/jquery.loading.css";
-
 import * as actionCreators from 'action_creators';
 import {observableFromStore} from 'reduxStoreObserver';
 
