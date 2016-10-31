@@ -23,10 +23,14 @@ export default React.createClass( {
             hashHistory.push( routeLocation );
         }
         var element = ReactDOM.findDOMNode( component );
-        element.addEventListener( 'click', ( evt ) => {
+        $( element ).find( "a" )[0].addEventListener( "click", ( evt ) => {
             component.onClickNavigation();
             this.onSelect( component.props.eventKey );
-        }, false );
+        });
+//        element.addEventListener( 'click', ( evt ) => {
+//            component.onClickNavigation();
+//            this.onSelect( component.props.eventKey );
+//        }, false );
     },
 
     renderNavItem: function(navItem, isNesteed){
