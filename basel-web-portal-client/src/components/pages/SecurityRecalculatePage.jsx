@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {PageHeader, Table} from 'react-bootstrap';
-
 import "jquery-loading/jquery.loading";
 import "jquery-loading/jquery.loading.css";
-
 import * as actionCreators from 'action_creators';
 import {observableFromStore} from 'reduxStoreObserver';
 
