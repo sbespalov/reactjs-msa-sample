@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {PageHeader, Table} from 'react-bootstrap';
 import $ from 'jquery';
-import "jquery-loading-1.2.0/jquery.loading";
-import "jquery-loading-1.2.0/jquery.loading.css";
+import "jquery-loading/jquery.loading";
+import "jquery-loading/jquery.loading.css";
 
 import * as actionCreators from 'action_creators';
 import {observableFromStore} from 'reduxStoreObserver';
@@ -27,6 +27,7 @@ class SecurityRecalculatePageComponent extends React.Component {
     componentWillUnmount() {
         console.log('#UnMount');
         $( this.getRecalculateResultTableElement() ).loading( 'stop' );
+        $( this.getRecalculateResultTableElement() ).loading( 'destroy' );
     }
 
     componentDidUpdate() {
