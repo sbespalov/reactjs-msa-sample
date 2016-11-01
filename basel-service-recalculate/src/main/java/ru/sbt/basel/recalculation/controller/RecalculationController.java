@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ru.sbt.basel.api.common.dto.FindPageResponseDto;
 import ru.sbt.basel.recalculation.api.RecalculationServiceApi;
 import ru.sbt.basel.recalculation.api.dto.BslFindRecalculationResultListRequest;
 import ru.sbt.basel.recalculation.api.dto.BslFindRecalculationResultListResponse;
@@ -32,9 +33,16 @@ public class RecalculationController implements RecalculationServiceApi {
 			e.printStackTrace();
 		}
 		BslFindRecalculationResultListResponse result = new BslFindRecalculationResultListResponse();
-		
+
 		List<RecalculationResultDto> recalculationResultList = recalculationService.findRecalculationResultList();
 		result.setRecalculationResultList(recalculationResultList);
+
+		FindPageResponseDto pageResponse = new FindPageResponseDto();
+		result.setPageResponse(pageResponse);
+
+		pageResponse.setPageNumber(1);
+		pageResponse.setPageSize(10);
+		pageResponse.setTotalCount(1000L);
 		
 		return result;
 	}

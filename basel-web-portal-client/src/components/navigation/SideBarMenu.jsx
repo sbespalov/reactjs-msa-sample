@@ -27,10 +27,6 @@ export default React.createClass( {
             component.onClickNavigation();
             this.onSelect( component.props.eventKey );
         });
-//        element.addEventListener( 'click', ( evt ) => {
-//            component.onClickNavigation();
-//            this.onSelect( component.props.eventKey );
-//        }, false );
     },
 
     renderNavItem: function(navItem, isNesteed){
@@ -39,6 +35,8 @@ export default React.createClass( {
         this.navItemMap[navItem.get('id')] = navItem.get('location');
         if (navItem.get('items')){
             return <NavDropdown
+                id={navItem.get('id')}
+                key={navItem.get('id')}
                 eventKey={navItem.get('id')}
                 title={navItem.get('title')}
                 role="menuitem"
@@ -52,9 +50,9 @@ export default React.createClass( {
             </NavDropdown>;
         };
         if (isNesteed){
-            return <MenuItem eventKey={navItem.get('id')}>{navItem.get('title')}</MenuItem>;
+            return <MenuItem key={navItem.get('id')} eventKey={navItem.get('id')}>{navItem.get('title')}</MenuItem>;
         }
-        return <NavItem eventKey={navItem.get('id')}>{navItem.get('title')}</NavItem>;
+        return <NavItem key={navItem.get('id')} eventKey={navItem.get('id')}>{navItem.get('title')}</NavItem>;
     },
     
     render: function() {

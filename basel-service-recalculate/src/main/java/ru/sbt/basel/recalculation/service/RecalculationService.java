@@ -22,37 +22,15 @@ public class RecalculationService {
 
 		List<RecalculationResultDto> result = new ArrayList<>();
 
-		RecalculationResultDto item = new RecalculationResultDto();
-		result.add(item);
+		for (int i = 0; i < 10; i++) {
+			RecalculationResultDto item = new RecalculationResultDto();
+			result.add(item);
 
-		item.setAskCalculateDetail("askCalculateDetail");
-		item.setBidCalculateResult("bidCalculateResult");
-		item.setDate(new Date());
-		item.setSecurity("security");
-
-		item = new RecalculationResultDto();
-		result.add(item);
-
-		item.setAskCalculateDetail("askCalculateDetail");
-		item.setBidCalculateResult("bidCalculateResult");
-		item.setDate(new Date());
-		item.setSecurity("security");
-
-		item = new RecalculationResultDto();
-		result.add(item);
-
-		item.setAskCalculateDetail("askCalculateDetail");
-		item.setBidCalculateResult("bidCalculateResult");
-		item.setDate(new Date());
-		item.setSecurity("security");
-
-		item = new RecalculationResultDto();
-		result.add(item);
-
-		item.setAskCalculateDetail("askCalculateDetail");
-		item.setBidCalculateResult("bidCalculateResult");
-		item.setDate(new Date());
-		item.setSecurity("security");
+			item.setAskCalculateDetail("askCalculateDetail");
+			item.setBidCalculateResult("bidCalculateResult");
+			item.setDate(new Date());
+			item.setSecurity("security");
+		}
 
 		return result;
 	}

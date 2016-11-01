@@ -7,7 +7,7 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { Observable } from 'rxjs'
 import $ from "jquery";
-import preloadedState from 'state.jsx'
+import preloadedState from 'initialState.jsx'
 
 import styles from 'bootstrap-3.3.7/css/bootstrap.css';
 import appStyles from 'styles/app.css';
