@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ru.sbt.basel.api.common.dto.FindPageRequestDto;
 import ru.sbt.basel.api.common.dto.FindPageResponseDto;
 import ru.sbt.basel.recalculation.api.RecalculationServiceApi;
 import ru.sbt.basel.recalculation.api.dto.BslFindRecalculationResultListRequest;
@@ -22,13 +24,13 @@ public class RecalculationController implements RecalculationServiceApi {
 	@Autowired
 	private RecalculationService recalculationService;
 
-	@RequestMapping(path = "/findRecalculationResultList", method = RequestMethod.GET)
+	@RequestMapping(path = "/findRecalculationResultList", method = RequestMethod.POST)
 	@CrossOrigin
 	@Override
 	public BslFindRecalculationResultListResponse findRecalculationResultList(
-			BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest) {
+			@RequestBody BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest) {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -40,10 +42,12 @@ public class RecalculationController implements RecalculationServiceApi {
 		FindPageResponseDto pageResponse = new FindPageResponseDto();
 		result.setPageResponse(pageResponse);
 
-		pageResponse.setPageNumber(1);
-		pageResponse.setPageSize(10);
+		FindPageRequestDto pageRequest = bslfindRecalculationResultListRequest.getPageRequest();
+
+		pageResponse.setPageNumber(pageRequest.getPageNumber());
+		pageResponse.setPageSize(pageRequest.getPageSize());
 		pageResponse.setTotalCount(1000L);
-		
+
 		return result;
 	}
 

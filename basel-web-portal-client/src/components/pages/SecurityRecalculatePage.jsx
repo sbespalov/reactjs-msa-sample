@@ -16,10 +16,11 @@ class SecurityRecalculatePageComponent extends React.Component {
 
     componentDidMount() {
         console.log( '#Mount' );
+        $( this.getRecalculateResultTableElement() ).loading( { zIndex: 5 });
         if ( this.getIsLoading() ) {
-            $( this.getRecalculateResultTableElement() ).loading();
+            $( this.getRecalculateResultTableElement() ).loading( 'start' );
         }
-        this.props.remoteFindRecalculationResultList();
+        this.props.remoteFindRecalculationResultList( {});
     }
 
     componentWillUnmount() {
@@ -31,7 +32,7 @@ class SecurityRecalculatePageComponent extends React.Component {
     componentDidUpdate() {
         console.log( '#Update' );
         if ( this.getIsLoading() ) {
-            $( this.getRecalculateResultTableElement() ).loading();
+            $( this.getRecalculateResultTableElement() ).loading( 'start' );
         } else {
             $( this.getRecalculateResultTableElement() ).loading( 'stop' );
         }
@@ -54,17 +55,29 @@ class SecurityRecalculatePageComponent extends React.Component {
     }
 
     getPageCount() {
-        return (this.props.totalCount || 0)/(this.props.pageSize || 1);
+        return ( this.props.totalCount || 0 ) / ( this.props.pageSize || 1 );
+    }
+
+    handlePageSelectProvider( that ) {
+        return function() {
+            that.handlePageSelect.apply( that, arguments );
+        };
     }
 
     handlePageSelect( eventKey ) {
+        this.props.remoteFindRecalculationResultList( {
+            pageRequest: {
+                pageNumber: eventKey
+            }
+
+        });
         return;
     }
 
     render() {
         return <div>
             <PageHeader>Security Recalculate</PageHeader>
-            <div ref="recalculateResultTableContainer" className="bslPagedTableContainer">
+            <div ref="recalculateResultTableContainer">
                 <Table responsive striped condensed hover ref="recalculateResultTable">
                     <thead>
                         <tr>
@@ -99,7 +112,7 @@ class SecurityRecalculatePageComponent extends React.Component {
                         maxButtons={5}
                         items={this.getPageCount() }
                         activePage={this.getCurrentPage() }
-                        onSelect={this.handlePageSelect() }/>
+                        onSelect={this.handlePageSelectProvider( this ) }/>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 
 export const actionCreators = {
 
-    remoteFindRecalculationResultList: function( filter ) {
+    remoteFindRecalculationResultList: function( request ) {
         return function( dispatch, getState, {$}) {
             if ( getState().securityRecalculate.getIn( ['recalculationResultList', 'loading'] ) ) {
                 return;
@@ -11,13 +11,19 @@ export const actionCreators = {
             console.log( 'Request' );
             dispatch( {
                 type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_REQUEST',
-                filter
+                request
             });
-            $.get( "http://localhost:8085/recalculation/findRecalculationResultList", function( responseData, status ) {
+            $.ajax( {
+                url: "http://localhost:8085/recalculation/findRecalculationResultList",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify( request ),
+                dataType: 'json'
+            }).done( function( responseData, status ) {
                 console.log( 'Response' );
-                dispatch({
+                dispatch( {
                     type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE',
-                    result: Immutable.fromJS({
+                    result: Immutable.fromJS( {
                         loading: false,
                         data: responseData.recalculationResultList,
                         pageNumber: responseData.pageResponse.pageNumber,
