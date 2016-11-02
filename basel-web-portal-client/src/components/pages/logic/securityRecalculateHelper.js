@@ -34,6 +34,23 @@ export const actionCreators = {
             });
         };
     },
+    
+    applyFindRecalculationResultListFilter(){
+        return function( dispatch, getState, {$}) {
+            dispatch(actionCreators.remoteFindRecalculationResultList({}));
+            dispatch({
+                type: 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER',
+                result: false
+            });
+        }
+    },
+    
+    showFindRecalculationResultListFilter(){
+        return {
+            type: 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER',
+            result: true
+        }
+    }
 
 }
 
@@ -43,6 +60,8 @@ export function securityRecalculateReducer( state = Map(), action ) {
             return state.setIn( ['recalculationResultList', 'loading'], true );
         case 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE':
             return state.set('recalculationResultList', action.result );
+        case 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER':
+            return state.set('showFilterSettings', action.result );
         default:
             return state;
     }

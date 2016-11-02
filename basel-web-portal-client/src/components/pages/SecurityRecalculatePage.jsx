@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import {PageHeader, Table, Pagination} from 'react-bootstrap';
+import {PageHeader, Table, Pagination, Glyphicon, Button, Modal} from 'react-bootstrap';
 import "jquery-loading/jquery.loading";
 import "jquery-loading/jquery.loading.css";
 import {actionCreators} from 'components/pages/logic/securityRecalculateHelper';
@@ -58,12 +58,6 @@ class SecurityRecalculatePageComponent extends React.Component {
         return ( this.props.totalCount || 0 ) / ( this.props.pageSize || 1 );
     }
 
-    handlePageSelectProvider( that ) {
-        return function() {
-            that.handlePageSelect.apply( that, arguments );
-        };
-    }
-
     handlePageSelect( eventKey ) {
         this.props.remoteFindRecalculationResultList( {
             pageRequest: {
@@ -73,10 +67,18 @@ class SecurityRecalculatePageComponent extends React.Component {
         });
         return;
     }
+    
+    handleCloseFilterSettings(){
+        this.props.applyFindRecalculationResultListFilter();
+    }
 
     render() {
         return <div>
-            <PageHeader>Security Recalculate</PageHeader>
+            <PageHeader>Security Recalculate
+                <Button bsStyle="link" onClick={this.props.showFindRecalculationResultListFilter}>
+                    <Glyphicon glyph="search"/>
+                </Button>
+            </PageHeader>
             <div ref="recalculateResultTableContainer">
                 <Table responsive striped condensed hover ref="recalculateResultTable">
                     <thead>
@@ -112,9 +114,23 @@ class SecurityRecalculatePageComponent extends React.Component {
                         maxButtons={5}
                         items={this.getPageCount() }
                         activePage={this.getCurrentPage() }
-                        onSelect={this.handlePageSelectProvider( this ) }/>
+                        onSelect={((that)=>{return (eventKey)=>{that.handlePageSelect( eventKey )}})(this)}/>
                 </div>
             </div>
+
+            <Modal show={this.props.showFilterSettings} onHide={((that)=>{return (eventKey)=>{this.handleCloseFilterSettings()}})(this)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Filter</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>Text in a modal</h4>
+                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={((that)=>{return (eventKey)=>{this.handleCloseFilterSettings()}})(this)}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
         </div>
     }
 
@@ -131,7 +147,8 @@ function mapStateToProps( state ) {
         pageSize: state.getIn( ['recalculationResultList', 'pageSize'] ),
         pageNumber: state.getIn( ['recalculationResultList', 'pageNumber'] ),
         totalCount: state.getIn( ['recalculationResultList', 'totalCount'] ),
-        loading: state.getIn( ['recalculationResultList', 'loading'] )
+        loading: state.getIn( ['recalculationResultList', 'loading'] ),
+        showFilterSettings: state.get( 'showFilterSettings' )
     };
 }
 
