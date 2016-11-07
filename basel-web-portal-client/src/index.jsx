@@ -12,6 +12,9 @@ import preloadedState from 'initialState.jsx'
 import styles from 'bootstrap-3.3.7/css/bootstrap.css';
 import appStyles from 'styles/app.css';
 
+import "moment";
+import "string.prototype.startswith";
+
 import observe from 'reduxStoreObserver';
 
 import reducer from 'reducers/index';

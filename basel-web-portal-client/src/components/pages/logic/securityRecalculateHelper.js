@@ -14,7 +14,7 @@ export const actionCreators = {
                 request
             });
             $.ajax( {
-                url: "http://localhost:8085/recalculation/findRecalculationResultList",
+                url: "http://192.168.12.116:8085/recalculation/findRecalculationResultList",
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify( request ),
@@ -35,9 +35,11 @@ export const actionCreators = {
         };
     },
     
-    applyFindRecalculationResultListFilter(){
+    applyFindRecalculationResultListFilter(isCancel){
         return function( dispatch, getState, {$}) {
-            dispatch(actionCreators.remoteFindRecalculationResultList({}));
+            if (isCancel === false){
+                dispatch(actionCreators.remoteFindRecalculationResultList({}));
+            }
             dispatch({
                 type: 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER',
                 result: false

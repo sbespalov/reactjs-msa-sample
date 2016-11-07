@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import {PageHeader, Table, Pagination, Glyphicon, Button, Modal} from 'react-bootstrap';
+import {PageHeader, Table, Pagination, Glyphicon, Button, Modal, Form, FormGroup, Col, ControlLabel, FormControl, InputGroup} from 'react-bootstrap';
 import "jquery-loading/jquery.loading";
 import "jquery-loading/jquery.loading.css";
+import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
+import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
+//import "eonasdan-bootstrap-datetimepicker";
 import {actionCreators} from 'components/pages/logic/securityRecalculateHelper';
 import {observableFromStore} from 'reduxStoreObserver';
 
@@ -21,6 +24,7 @@ class SecurityRecalculatePageComponent extends React.Component {
             $( this.getRecalculateResultTableElement() ).loading( 'start' );
         }
         this.props.remoteFindRecalculationResultList( {});
+
     }
 
     componentWillUnmount() {
@@ -67,9 +71,9 @@ class SecurityRecalculatePageComponent extends React.Component {
         });
         return;
     }
-    
-    handleCloseFilterSettings(){
-        this.props.applyFindRecalculationResultListFilter();
+
+    handleCloseFilterSettings( isCancel ) {
+        this.props.applyFindRecalculationResultListFilter( isCancel );
     }
 
     render() {
@@ -104,7 +108,7 @@ class SecurityRecalculatePageComponent extends React.Component {
                 </Table>
                 <div className="bslPagedTableNavigation">
                     <Pagination
-                        bsSize="small"
+                        bsSize="mdall"
                         prev
                         next
                         first
@@ -114,20 +118,71 @@ class SecurityRecalculatePageComponent extends React.Component {
                         maxButtons={5}
                         items={this.getPageCount() }
                         activePage={this.getCurrentPage() }
-                        onSelect={((that)=>{return (eventKey)=>{that.handlePageSelect( eventKey )}})(this)}/>
+                        onSelect={( ( that ) => { return ( eventKey ) => { that.handlePageSelect( eventKey ) } })( this ) }/>
                 </div>
             </div>
 
-            <Modal show={this.props.showFilterSettings} onHide={((that)=>{return (eventKey)=>{this.handleCloseFilterSettings()}})(this)}>
+            <Modal show={this.props.showFilterSettings}
+                onHide={( ( that ) => { return ( eventKey ) => { this.handleCloseFilterSettings( true ) } })( this ) }
+                onEntered={( ( that ) => { return () => { that.handleShowFilterSettings() } })( this ) }>
                 <Modal.Header closeButton>
                     <Modal.Title>Filter</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Text in a modal</h4>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+                    <Form horizontal>
+                        <FormGroup controlId="srResultListFilterDetail">
+                            <Col componentClass={ControlLabel} md={2}>
+                                Detail
+                            </Col>
+                            <Col md={10}>
+                                <FormControl type="text" placeholder="Bid/Ask Calculate Detail" />
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Col componentClass={ControlLabel} md={2}>
+                                Date
+                            </Col>
+                            <Col md={5}>
+                                <InputGroup
+                                    ref={( targetComponent ) => {
+                                        var targetElement = ReactDOM.findDOMNode( targetComponent );
+                                        $( targetElement ).datetimepicker( {
+                                            viewMode: 'days',
+                                            format: 'YYYY/MM/DD HH:mm:ss'
+                                        });
+
+                                    } }>
+
+                                    <FormControl type="text" placeholder="From"/>
+                                    <InputGroup.Addon>
+                                        <Glyphicon glyph="calendar" />
+                                    </InputGroup.Addon>
+                                </InputGroup>
+                            </Col>
+                            <Col md={5}>
+                                <InputGroup
+                                    ref={( targetComponent ) => {
+                                        var targetElement = ReactDOM.findDOMNode( targetComponent );
+                                        $( targetElement ).datetimepicker( {
+                                            viewMode: 'days',
+                                            format: 'YYYY/MM/DD HH:mm:ss'
+                                        });
+
+                                    } }>
+
+                                    <FormControl type="text" placeholder="To"/>
+                                    <InputGroup.Addon>
+                                        <Glyphicon glyph="calendar" />
+                                    </InputGroup.Addon>
+                                </InputGroup>
+                            </Col>
+                        </FormGroup>
+                    </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={((that)=>{return (eventKey)=>{this.handleCloseFilterSettings()}})(this)}>Close</Button>
+                    <Button onClick={( ( that ) => { return ( eventKey ) => { this.handleCloseFilterSettings( false ) } })( this ) }>Ok</Button>
+                    <Button onClick={( ( that ) => { return ( eventKey ) => { this.handleCloseFilterSettings( true ) } })( this ) }>Cancel</Button>
                 </Modal.Footer>
             </Modal>
 
