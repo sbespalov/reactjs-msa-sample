@@ -35,10 +35,10 @@ export const actionCreators = {
         };
     },
     
-    applyFindRecalculationResultListFilter(isCancel){
+    applyFindRecalculationResultListFilter(filter){
         return function( dispatch, getState, {$}) {
-            if (isCancel === false){
-                dispatch(actionCreators.remoteFindRecalculationResultList({}));
+            if (filter){
+                dispatch(actionCreators.remoteFindRecalculationResultList(filter));
             }
             dispatch({
                 type: 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER',

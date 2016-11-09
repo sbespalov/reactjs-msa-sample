@@ -57,7 +57,8 @@ module.exports = {
     plugins : [ extractModuleCss, extractGlobalCss, html,
             new webpack.ProvidePlugin({
                 $ : "jquery",
-                jQuery : "jquery"
+                jQuery : "jquery",
+                ReactDOM: "react-dom"
             }) ],
     devServer : {
         contentBase : './dist',

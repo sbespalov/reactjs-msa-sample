@@ -8,6 +8,7 @@ import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
 //import "eonasdan-bootstrap-datetimepicker";
 import {actionCreators} from 'components/pages/logic/securityRecalculateHelper';
+import CommonForm from 'components/common/CommonForm';
 import {observableFromStore} from 'reduxStoreObserver';
 
 class SecurityRecalculatePageComponent extends React.Component {
@@ -15,6 +16,7 @@ class SecurityRecalculatePageComponent extends React.Component {
     constructor( props, context ) {
         super( props, context );
         console.log( '#Constructor' );
+        this.handlePageSelect = this.handlePageSelect.bind( this );
     }
 
     componentDidMount() {
@@ -73,7 +75,8 @@ class SecurityRecalculatePageComponent extends React.Component {
     }
 
     handleCloseFilterSettings( isCancel ) {
-        this.props.applyFindRecalculationResultListFilter( isCancel );
+        var filterValue = this.refs.resultListFilterDetailForm.getValue();
+        this.props.applyFindRecalculationResultListFilter( filterValue );
     }
 
     render() {
@@ -118,24 +121,24 @@ class SecurityRecalculatePageComponent extends React.Component {
                         maxButtons={5}
                         items={this.getPageCount() }
                         activePage={this.getCurrentPage() }
-                        onSelect={( ( that ) => { return ( eventKey ) => { that.handlePageSelect( eventKey ) } })( this ) }/>
+                        onSelect={this.handlePageSelect}/>
                 </div>
             </div>
 
             <Modal show={this.props.showFilterSettings}
-                onHide={( ( that ) => { return ( eventKey ) => { this.handleCloseFilterSettings( true ) } })( this ) }
-                onEntered={( ( that ) => { return () => { that.handleShowFilterSettings() } })( this ) }>
+                onHide={( eventKey ) => { this.handleCloseFilterSettings( true ) } }
+                onEntered={this.handleShowFilterSettings}>
                 <Modal.Header closeButton>
                     <Modal.Title>Filter</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form horizontal>
-                        <FormGroup controlId="srResultListFilterDetail">
+                    <CommonForm horizontal ref="resultListFilterDetailForm">
+                        <FormGroup>
                             <Col componentClass={ControlLabel} md={2}>
                                 Detail
                             </Col>
                             <Col md={10}>
-                                <FormControl type="text" placeholder="Bid/Ask Calculate Detail" />
+                                <FormControl type="text" placeholder="Bid/Ask Calculate Detail" id="calculationDetail"/>
                             </Col>
                         </FormGroup>
 
@@ -154,7 +157,7 @@ class SecurityRecalculatePageComponent extends React.Component {
 
                                     } }>
 
-                                    <FormControl type="text" placeholder="From"/>
+                                    <FormControl type="text" placeholder="From" id="dateFrom"/>
                                     <InputGroup.Addon>
                                         <Glyphicon glyph="calendar" />
                                     </InputGroup.Addon>
@@ -171,28 +174,24 @@ class SecurityRecalculatePageComponent extends React.Component {
 
                                     } }>
 
-                                    <FormControl type="text" placeholder="To"/>
+                                    <FormControl type="text" placeholder="To" id="dateTo"/>
                                     <InputGroup.Addon>
                                         <Glyphicon glyph="calendar" />
                                     </InputGroup.Addon>
                                 </InputGroup>
                             </Col>
                         </FormGroup>
-                    </Form>
+                    </CommonForm>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={( ( that ) => { return ( eventKey ) => { this.handleCloseFilterSettings( false ) } })( this ) }>Ok</Button>
-                    <Button onClick={( ( that ) => { return ( eventKey ) => { this.handleCloseFilterSettings( true ) } })( this ) }>Cancel</Button>
+                    <Button onClick={( eventKey ) => { this.handleCloseFilterSettings() } }>Ok</Button>
+                    <Button onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.resultListFilterDetailForm.getValue() ) } }>Cancel</Button>
                 </Modal.Footer>
             </Modal>
 
         </div>
     }
 
-}
-
-SecurityRecalculatePageComponent.contextTypes = {
-    store: React.PropTypes.object
 }
 
 function mapStateToProps( state ) {

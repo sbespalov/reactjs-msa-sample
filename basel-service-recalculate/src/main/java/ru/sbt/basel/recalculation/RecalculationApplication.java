@@ -1,5 +1,6 @@
 package ru.sbt.basel.recalculation;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
@@ -29,7 +30,9 @@ public class RecalculationApplication {
 
 	@Bean
 	public MappingJackson2HttpMessageConverter jacksonHttpMessageConverter() {
-		return new MappingJackson2HttpMessageConverter();
+		MappingJackson2HttpMessageConverter jmc = new MappingJackson2HttpMessageConverter();
+		jmc.getObjectMapper().setDateFormat(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"));
+		return jmc;
 	}
 
 	@Bean
