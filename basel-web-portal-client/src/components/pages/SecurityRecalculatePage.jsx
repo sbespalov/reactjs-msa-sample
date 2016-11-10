@@ -82,7 +82,7 @@ class SecurityRecalculatePageComponent extends React.Component {
     render() {
         return <div>
             <PageHeader>Security Recalculate
-                <Button bsStyle="link" onClick={this.props.showFindRecalculationResultListFilter}>
+                <Button bsStyle="link" onClick={this.props.toggleFindRecalculationResultListFilter}>
                     <Glyphicon glyph="search"/>
                 </Button>
             </PageHeader>

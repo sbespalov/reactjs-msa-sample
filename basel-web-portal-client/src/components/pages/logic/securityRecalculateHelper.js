@@ -47,7 +47,7 @@ export const actionCreators = {
         }
     },
     
-    showFindRecalculationResultListFilter(){
+    toggleFindRecalculationResultListFilter(){
         return {
             type: 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER',
             result: true

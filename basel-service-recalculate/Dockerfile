@@ -1,7 +1,6 @@
-FROM java:8-jre
-MAINTAINER Alexander Lukyanchikov <sqshq@sqshq.com>
+FROM basel-docker-java:latest
 
-ADD ./target/account-service.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/account-service.jar"]
+ADD ./target/basel-service-recalculate.jar /app/
+CMD ["java", "-Xmx256m", "-jar", "/app/basel-service-recalculate.jar"]
 
-EXPOSE 6000
+EXPOSE 8085

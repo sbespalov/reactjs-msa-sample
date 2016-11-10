@@ -33,8 +33,4 @@ class CommonForm extends Form {
 
 }
 
-CommonForm.contextTypes = {
-    refs: React.PropTypes.arrayOf( React.PropTypes.element )
-};
-
 export default CommonForm;
