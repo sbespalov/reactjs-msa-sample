@@ -14,7 +14,7 @@ export const actionCreators = {
                 request
             });
             $.ajax( {
-                url: "http://192.168.12.116:8085/recalculation/findRecalculationResultList",
+                url: "/recalculate/recalculation/findRecalculationResultList", 
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify( request ),

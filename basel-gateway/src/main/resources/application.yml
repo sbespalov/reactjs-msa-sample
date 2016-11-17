@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: basel-gateway
+  cloud:
+    config:
+      uri: http://basel-config:8888
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user

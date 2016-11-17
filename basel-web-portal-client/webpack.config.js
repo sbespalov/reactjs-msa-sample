@@ -58,14 +58,19 @@ module.exports = {
             new webpack.ProvidePlugin({
                 $ : "jquery",
                 jQuery : "jquery",
-                ReactDOM: "react-dom"
+                ReactDOM : "react-dom"
             }) ],
     devServer : {
         contentBase : './dist',
-        host: '0.0.0.0',
-        port: 8086,
+        host : '0.0.0.0',
+        port : 8086,
         headers : {
             "Access-Control-Allow-Origin" : "*"
+        },
+        proxy : {
+            '/' : {
+                target : 'http://localhost:4010'
+            }
         }
     }
 };

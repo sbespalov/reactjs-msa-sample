@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  basel-config:
+    build: basel-config
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111    
+    ports:
+      - 8888:8888
+
+  basel-gateway:
+    build: basel-gateway
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111    
+    links:
+      - "basel-config"
+    depends_on:
+      - "basel-config"
+    ports:
+      - 4000:4000
+
+  basel-service-recalculate:
+    build: basel-service-recalculate
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111    
+    links:
+      - "basel-config"    
+    depends_on:
+      - "basel-config"
+    ports:
+      - 4010:4010
+
