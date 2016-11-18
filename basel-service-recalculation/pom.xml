@@ -57,7 +57,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>basel-service-recalculate</finalName>
+					<finalName>basel-service-recalculation</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

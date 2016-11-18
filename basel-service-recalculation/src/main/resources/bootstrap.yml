@@ -1,6 +1,6 @@
 spring:
   application:
-    name: basel-service-recalculate
+    name: basel-service-recalculation
   cloud:
     config:
       uri: http://${BASEL_CONFIG_HOST:localhost}:8888

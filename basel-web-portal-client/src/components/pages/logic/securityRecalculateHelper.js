@@ -14,7 +14,7 @@ export const actionCreators = {
                 request
             });
             $.ajax( {
-                url: "/recalculate/recalculation/findRecalculationResultList", 
+                url: "/recalculation/findRecalculationResultList", 
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify( request ),

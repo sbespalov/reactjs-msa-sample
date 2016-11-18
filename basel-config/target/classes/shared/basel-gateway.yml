@@ -19,8 +19,8 @@ zuul:
   routes:
   
     service-recalculate:
-        path: /recalculate/**
-        serviceId: basel-service-recalculate
+        path: /recalculation/**
+        serviceId: basel-service-recalculation
         stripPrefix: false
         sensitiveHeaders:
 
