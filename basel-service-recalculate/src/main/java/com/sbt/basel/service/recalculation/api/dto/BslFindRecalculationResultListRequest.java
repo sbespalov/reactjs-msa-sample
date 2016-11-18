@@ -1,8 +1,8 @@
-package ru.sbt.basel.recalculation.api.dto;
+package com.sbt.basel.service.recalculation.api.dto;
 
 import java.util.Date;
 
-import ru.sbt.basel.api.common.dto.FindPageRequestDto;
+import com.sbt.basel.service.api.common.dto.FindPageRequestDto;
 
 public class BslFindRecalculationResultListRequest {
 

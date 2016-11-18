@@ -1,4 +1,4 @@
-package ru.sbt.basel.api.common.dto;
+package com.sbt.basel.service.api.common.dto;
 
 public class FindPageResponseDto {
 

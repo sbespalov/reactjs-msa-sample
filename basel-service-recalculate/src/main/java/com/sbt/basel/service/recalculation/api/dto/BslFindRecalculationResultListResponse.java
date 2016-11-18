@@ -1,10 +1,10 @@
-package ru.sbt.basel.recalculation.api.dto;
+package com.sbt.basel.service.recalculation.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.sbt.basel.api.common.dto.FindPageResponseDto;
-import ru.sbt.basel.recalculation.domain.RecalculationResultDto;
+import com.sbt.basel.service.api.common.dto.FindPageResponseDto;
+import com.sbt.basel.service.recalculation.domain.RecalculationResultDto;
 
 public class BslFindRecalculationResultListResponse {
 

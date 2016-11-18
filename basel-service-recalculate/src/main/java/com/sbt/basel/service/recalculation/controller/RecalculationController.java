@@ -1,4 +1,4 @@
-package ru.sbt.basel.recalculation.controller;
+package com.sbt.basel.service.recalculation.controller;
 
 import java.util.List;
 
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.sbt.basel.api.common.dto.FindPageRequestDto;
-import ru.sbt.basel.api.common.dto.FindPageResponseDto;
-import ru.sbt.basel.recalculation.api.RecalculationServiceApi;
-import ru.sbt.basel.recalculation.api.dto.BslFindRecalculationResultListRequest;
-import ru.sbt.basel.recalculation.api.dto.BslFindRecalculationResultListResponse;
-import ru.sbt.basel.recalculation.domain.RecalculationResultDto;
-import ru.sbt.basel.recalculation.service.RecalculationService;
+import com.sbt.basel.service.api.common.dto.FindPageRequestDto;
+import com.sbt.basel.service.api.common.dto.FindPageResponseDto;
+import com.sbt.basel.service.recalculation.api.RecalculationServiceApi;
+import com.sbt.basel.service.recalculation.api.dto.BslFindRecalculationResultListRequest;
+import com.sbt.basel.service.recalculation.api.dto.BslFindRecalculationResultListResponse;
+import com.sbt.basel.service.recalculation.domain.RecalculationResultDto;
+import com.sbt.basel.service.recalculation.service.RecalculationService;
 
 @RestController
 @RequestMapping("recalculation")

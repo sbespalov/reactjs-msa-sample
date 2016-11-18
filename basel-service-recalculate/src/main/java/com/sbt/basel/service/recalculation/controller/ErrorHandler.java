@@ -1,4 +1,4 @@
-package ru.sbt.basel.recalculation.controller;
+package com.sbt.basel.service.recalculation.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

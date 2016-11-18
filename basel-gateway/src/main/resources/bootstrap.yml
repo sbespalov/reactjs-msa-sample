@@ -3,7 +3,7 @@ spring:
     name: basel-gateway
   cloud:
     config:
-      uri: http://basel-config:8888
+      uri: http://${BASEL_CONFIG_HOST:localhost}:8888
       fail-fast: true
-      password: ${CONFIG_SERVICE_PASSWORD}
+      password: ${CONFIG_SERVICE_PASSWORD:111}
       username: user

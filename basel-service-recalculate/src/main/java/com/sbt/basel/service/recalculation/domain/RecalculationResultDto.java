@@ -1,4 +1,4 @@
-package ru.sbt.basel.recalculation.domain;
+package com.sbt.basel.service.recalculation.domain;
 
 import java.util.Date;
 

@@ -1,24 +1,27 @@
-package ru.sbt.basel.recalculation;
+package com.sbt.basel.service.recalculation;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @SpringBootApplication
-// @EnableResourceServer
-// @EnableDiscoveryClient
-// @EnableOAuth2Client
-// @EnableFeignClients
-// @EnableGlobalMethodSecurity(prePostEnabled = true)
-// @EnableConfigurationProperties
-// @Configuration
+//@EnableResourceServer
+@EnableDiscoveryClient
+//@EnableOAuth2Client
+@EnableFeignClients
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableConfigurationProperties
+@Configuration
 public class RecalculationApplication {
 
 	// @Autowired

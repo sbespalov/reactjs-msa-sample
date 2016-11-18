@@ -9,6 +9,5 @@ spring:
 #      write-dates-as-timestamps:  false    
       
 server:
-  port: 4010
-  context-path: /recalculate 
-  
+  port: 4020
+  context-path: /recalculate  

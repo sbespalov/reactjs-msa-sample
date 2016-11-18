@@ -3,7 +3,8 @@ package ru.sbt.basel.recalculation.test.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ru.sbt.basel.recalculation.service.RecalculationService;
+import com.sbt.basel.service.recalculation.service.RecalculationService;
+
 import ru.sbt.basel.recalculation.test.AccountServiceApplicationTest;
 
 public class RecalculationServiceTestCase extends AccountServiceApplicationTest {

@@ -1,4 +1,4 @@
-package ru.sbt.basel.recalculation.service;
+package com.sbt.basel.service.recalculation.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ru.sbt.basel.recalculation.domain.RecalculationResultDto;
+import com.sbt.basel.service.recalculation.domain.RecalculationResultDto;
 
 @Service
 public class RecalculationService {
