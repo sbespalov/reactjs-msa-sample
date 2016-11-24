@@ -10,4 +10,4 @@ spring:
       
 server:
   port: 4020
-  context-path: /recalculate  
+  context-path: /recalculation  

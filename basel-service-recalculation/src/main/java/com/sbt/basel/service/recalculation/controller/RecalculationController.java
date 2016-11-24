@@ -18,7 +18,7 @@ import com.sbt.basel.service.recalculation.domain.RecalculationResultDto;
 import com.sbt.basel.service.recalculation.service.RecalculationService;
 
 @RestController
-@RequestMapping
+@RequestMapping("/recalculation")
 public class RecalculationController implements RecalculationServiceApi {
 
 	@Autowired

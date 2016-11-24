@@ -1,6 +1,7 @@
 logging:
   level:
-    org.springframework.security: INFO
+    root: DEBUG
+#   org.springframework.security: INFO
 
 eureka:
   instance:
