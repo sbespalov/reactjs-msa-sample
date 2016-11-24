@@ -26,3 +26,7 @@ zuul:
 
 server:
   port: 4010
+  
+basel:
+  security:
+    jwtSecret: ${JWT_SECRET:secret}

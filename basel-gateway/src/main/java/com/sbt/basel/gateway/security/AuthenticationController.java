@@ -24,7 +24,7 @@ public class AuthenticationController
 
     @Autowired
     public
-           void init(@Value("${secret:secret}") String secret)
+           void init(@Value("${basel.security.jwtSecret}") String secret)
     {
 
         try

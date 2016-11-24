@@ -29,7 +29,7 @@ public class JWtAuthenticationProvider implements AuthenticationProvider
 
     @Autowired
     public
-           void init(@Value("${secret:secret}") String secret) throws UnsupportedEncodingException
+           void init(@Value("${basel.security.jwtSecret}") String secret) throws UnsupportedEncodingException
     {
 
         key = new HmacKey(secret.getBytes("UTF-8"));
