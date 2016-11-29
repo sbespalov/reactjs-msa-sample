@@ -1,4 +1,5 @@
 export * from 'views/LoginView';
+export * from 'views/LogoutView';
 export * from 'views/HomeView';
 export * from 'views/MonitoringView';
 export * from 'views/ReferenciesView';

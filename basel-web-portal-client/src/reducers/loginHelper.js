@@ -4,6 +4,12 @@ import { hashHistory } from 'react-router';
 
 export const actionCreators = {
 
+    logout: function(){
+        return {
+            type: 'LOGOUT'
+        }
+    },
+        
     remoteAuthentucate: function( userName, password ) {
         return function( dispatch, getState, {$}) {
             if ( getState().security.getIn( ['login', 'loading'] ) ) {
@@ -60,6 +66,8 @@ export function securityReducer( state = Map(), action ) {
             return state.set( 'loading', true );
         case 'REMOTE_AUTHENTICATE_RESPONSE':
             return action.result;
+        case 'LOGOUT':
+            return Map();            
         default:
             return state;
     }

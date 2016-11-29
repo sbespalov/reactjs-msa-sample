@@ -25,7 +25,7 @@ class SecurityRecalculateViewComponent extends React.Component {
         if ( this.getIsLoading() ) {
             $( this.getRecalculateResultTableElement() ).loading( 'start' );
         }
-        this.props.remoteFindRecalculationResultList( {});
+        this.props.remoteFindRecalculationResultList({});
 
     }
 

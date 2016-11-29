@@ -6,6 +6,7 @@ import * as page from 'views/index';
 export default <Route path="/" component={Main}>
     <IndexRoute component={page.HomeView}/>" +
     <Route path="/login" component={page.LoginView} />
+    <Route path="/logout" component={page.LogoutView} />
     <Route path="/monitoring" component={page.MonitoringView} />
     <Route path="/security-recalculate" component={page.SecurityRecalculateView} />
     <Route path="/reports" component={page.ReportsView} />
