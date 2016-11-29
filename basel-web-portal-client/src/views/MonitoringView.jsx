@@ -1,7 +1,7 @@
 import React from 'react';
 import {PageHeader} from 'react-bootstrap';
 
-export const MonitoringPage = React.createClass( {
+export const MonitoringView = React.createClass( {
 
     render: function() {
         return <PageHeader>Monitoring</PageHeader>;

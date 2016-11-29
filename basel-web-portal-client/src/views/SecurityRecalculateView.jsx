@@ -7,11 +7,11 @@ import "jquery-loading/jquery.loading.css";
 import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
 //import "eonasdan-bootstrap-datetimepicker";
-import {actionCreators} from 'components/pages/logic/securityRecalculateHelper';
+import {actionCreators} from 'reducers/securityRecalculateHelper';
 import CommonForm from 'components/common/CommonForm';
 import {observableFromStore} from 'reduxStoreObserver';
 
-class SecurityRecalculatePageComponent extends React.Component {
+class SecurityRecalculateViewComponent extends React.Component {
 
     constructor( props, context ) {
         super( props, context );
@@ -206,7 +206,7 @@ function mapStateToProps( state ) {
     };
 }
 
-export const SecurityRecalculatePage = connect(
+export const SecurityRecalculateView = connect(
     mapStateToProps,
     actionCreators
-)( SecurityRecalculatePageComponent );
+)( SecurityRecalculateViewComponent );

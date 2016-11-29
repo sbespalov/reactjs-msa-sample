@@ -3,7 +3,7 @@ import {PageHeader} from 'react-bootstrap';
 import { hashHistory } from 'react-router';
 import AppContext from 'AppContext';
 
-export const HomePage = React.createClass( {
+export const HomeView = React.createClass( {
 
     componentWillMount: function() {
         var user = AppContext.getUser();

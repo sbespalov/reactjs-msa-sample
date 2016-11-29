@@ -1,12 +1,12 @@
 import React from 'react';
 import * as rb from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {actionCreators} from 'components/pages/logic/loginHelper';
+import {actionCreators} from 'reducers/loginHelper';
 import CommonForm from 'components/common/CommonForm';
 
 import styles from './login-page.module.css';
 
-class LoginPageComponent extends React.Component {
+class LoginViewComponent extends React.Component {
 
     handleLogin( data ) {
         this.props.remoteAuthentucate( data.email, data.password );
@@ -61,7 +61,7 @@ function mapStateToProps( state ) {
     };
 }
 
-export const LoginPage = connect(
+export const LoginView = connect(
     mapStateToProps,
     actionCreators
-)( LoginPageComponent );
+)( LoginViewComponent );
