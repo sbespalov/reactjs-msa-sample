@@ -2,15 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import styles from './app.module.css';
-import SideBarMenu from './navigation/SideBarMenu';
+import SideBarMenu from 'components/navigation/SideBarMenu';
 import * as actionCreators from 'action_creators';
 
-const App = React.createClass( {
+const AuthorizedApp = React.createClass( {
 
     render: function() {
-
-        var componentInstance = this;
-
         return <div className={styles.bslPageContainer}>
             <SideBarMenu
                 activeMenuItemKey={this.props.activeMenuItemKey}
@@ -25,12 +22,12 @@ const App = React.createClass( {
 function mapStateToProps( state ) {
     var state = state.navigation;
     return {
-        activeMenuItemKey: state.get('activeMenuItemKey' ),
-        navItems: state.get('navItems' )
+        activeMenuItemKey: state.get( 'activeMenuItemKey' ),
+        navItems: state.get( 'navItems' )
     };
 }
 
 export default connect(
     mapStateToProps,
     actionCreators
-)( App );
+)( AuthorizedApp );

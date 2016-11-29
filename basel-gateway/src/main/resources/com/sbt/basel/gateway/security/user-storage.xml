@@ -1,6 +1,8 @@
 <user-storage>
 	<user>
-		<name>user1</name>
-		<password>user1</password>
+		<firstName>Sergey</firstName>
+		<lastName>Bespalov</lastName>
+		<email>sbespalov@wellink.ru</email>
+		<password>123</password>
 	</user>
 </user-storage>

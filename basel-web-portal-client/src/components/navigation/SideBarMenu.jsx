@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
 import { hashHistory } from 'react-router'
+import { Link } from 'react-router'
+
+
+import AppContext from 'AppContext';
 import styles from 'components/navigation/sideBarMenu.module.css';
 
 export default React.createClass( {
@@ -11,20 +15,21 @@ export default React.createClass( {
     },
 
     onSelect: function( activeMenuItemKey ) {
+        if (activeMenuItemKey === this.getActiveMenuItemKey()){
+            return;
+        }
         this.props.onMenuItemSelect( activeMenuItemKey );
+        //this.props.dispatch(pushState(null, `/login?next=${redirectAfterLogin}`));        
         hashHistory.push(this.navItemMap[activeMenuItemKey]);
     },
 
     addOnClickNavigation: function( component, routeLocation ) {
-        if ( component.onClickNavigation ) {
+        if ( component.isOnClickNavigationEnabled ) {
             return;
         }
-        component.onClickNavigation = () => {
-            hashHistory.push( routeLocation );
-        }
+        component.isOnClickNavigationEnabled = true;
         var element = ReactDOM.findDOMNode( component );
         $( element ).find( "a" )[0].addEventListener( "click", ( evt ) => {
-            component.onClickNavigation();
             this.onSelect( component.props.eventKey );
         });
     },
@@ -56,12 +61,16 @@ export default React.createClass( {
     },
     
     render: function() {
+        var userLabel = AppContext.getUser().firstName + ' ' + AppContext.getUser().lastName;
+        
         return <div id="sidebar-menu" className={styles.bslSideBarMenuContainer}>
             <Navbar fluid className={styles.sidebar} >
 
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">Ф.Киркоров</a>
+                        <a href="/">
+                            {userLabel}
+                        </a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

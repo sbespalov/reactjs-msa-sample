@@ -1,17 +1,19 @@
 import Immutable from 'immutable';
 import navItems from 'components/navigation/navItems';
 
-export default {
-    navigation: Immutable.fromJS( {
-        navItems: navItems
-    })
-//    ,securityRecalculate: Immutable.fromJS( {
-//        recalculationResultList: {
-//            data: [],
-//            pageCount: 0,
-//            currentPage: 0,
-//            loading: false
-//        }
-//    })
-};
+const getInitialState = function() {
+    var result = {
+        navigation: Immutable.fromJS( {
+            navItems: navItems
+        })
+    };
+
+    var security = sessionStorage.getItem( 'security' );
+    if ( security ) {
+        result['security'] = Immutable.fromJS( JSON.parse( security ) );
+    }
+    return result;
+}
+
+export default getInitialState;
 

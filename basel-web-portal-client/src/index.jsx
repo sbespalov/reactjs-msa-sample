@@ -1,29 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import {Router, hashHistory} from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux'
 import { Observable } from 'rxjs'
-import $ from "jquery";
-import preloadedState from 'initialState.jsx'
 
 import styles from 'bootstrap-3.3.7/css/bootstrap.css';
 import appStyles from 'styles/app.css';
 
 import "moment";
 import "string.prototype.startswith";
+import $ from "jquery";
 
-import observe from 'reduxStoreObserver';
-
-import reducer from 'reducers/index';
-import remoteActionMiddleware from 'remote_action_middleware';
-import navItems from 'components/navigation/navItems'
-import routes from 'components/Routes'
+import getInitialState from 'initialState.jsx'
+import reducers from 'reducers/index';
+import routes from 'routes'
 import remote_action_middleware from 'remote_action_middleware'
-import * as actionCreators from 'action_creators';
-
 import AppContext from 'AppContext';
 
 const observableFromStore = function( store ) {
@@ -33,25 +27,29 @@ const observableFromStore = function( store ) {
 };
 
 const store = createStore(
-    reducer,
-    preloadedState,
+    reducers,
+    getInitialState(),
     applyMiddleware( remote_action_middleware, thunk.withExtraArgument( { $ }) )
 );
-AppContext.setStore(store);
 
-//var state$ = observableFromStore(store);
-//
-//const navChanged$ = state$
-//    .map(state => state.routing.locationBeforeTransitions.pathname )
-//    .distinctUntilChanged()
-//    .filter(pathname => pathname === '/security-recalculate');
-//
-//navChanged$.subscribe( (val)=>{
-//    console.log( 'Property changed ' + val);
-//    store.dispatch(actionCreators.remoteFindRecalculationResultList());
-//});
+var state$ = observableFromStore( store );
+
+const authChanged$ = state$
+    .map( state => state.security )
+    .distinctUntilChanged();
+
+authChanged$.subscribe(( val ) => {
+    console.log( 'Auth changed' );
+    if ( !val.toJS ) {
+        console.log( 'Auth null: [' + val + "]" );
+        return;
+    }
+    sessionStorage.setItem( 'security', JSON.stringify( val.toJS() ) );
+});
 
 const history = syncHistoryWithStore( hashHistory, store )
+
+AppContext.setStore( store );
 
 ReactDOM.render(
     <Provider store={store}>

@@ -9,19 +9,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User
 {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
+    private String email;
 
     public
-           String getName()
+           String getFirstName()
     {
-        return name;
+        return firstName;
     }
 
     public
-           void setName(String name)
+           void setFirstName(String name)
     {
-        this.name = name;
+        this.firstName = name;
+    }
+
+    public
+           String getLastName()
+    {
+        return lastName;
+    }
+
+    public
+           void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public
+           String getEmail()
+    {
+        return email;
+    }
+
+    public
+           void setEmail(String email)
+    {
+        this.email = email;
     }
 
     public

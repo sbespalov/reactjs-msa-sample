@@ -6,19 +6,6 @@ class CommonForm extends Form {
 
     constructor( props, context ) {
         super( props, context );
-        this.visitReactElements = this.visitReactElements.bind( this );
-    }
-
-    visitReactElements( x, f, depth = 0 ) {
-        var that = this;
-        
-        if ( !x || !x.props ) return;
-
-        f( x, depth );
-        
-        React.Children.forEach( x.props.children, function( x ) {
-            that.visitReactElements( x, f, depth + 1 );
-        })
     }
 
     getValue() {
