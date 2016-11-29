@@ -17,9 +17,10 @@
 	<modules>
 		<module>basel-parent</module>
 		<module>basel-config</module>
+		<module>basel-service-registry</module>		
 		<module>basel-gateway</module>
 		<module>basel-web-portal-client</module>
-		<module>basel-service-recalculate</module>
+		<module>basel-service-recalculation</module>
 	</modules>
 
 

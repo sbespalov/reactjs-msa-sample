@@ -8,10 +8,11 @@ services:
     ports:
       - 8888:8888
 
-  basel-gateway:
-    build: basel-gateway
+  basel-service-registry:
+    build: basel-service-registry
     environment:
-      - CONFIG_SERVICE_PASSWORD=111    
+      - CONFIG_SERVICE_PASSWORD=111
+      - BASEL_CONFIG_HOST=basel-config
     links:
       - "basel-config"
     depends_on:
@@ -19,14 +20,34 @@ services:
     ports:
       - 4000:4000
 
-  basel-service-recalculate:
-    build: basel-service-recalculate
+  basel-gateway:
+    build: basel-gateway
     environment:
-      - CONFIG_SERVICE_PASSWORD=111    
+      - CONFIG_SERVICE_PASSWORD=111
+      - JWT_SECRET=123
+      - BASEL_CONFIG_HOST=basel-config
+      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
     links:
-      - "basel-config"    
+      - "basel-config"
+      - "basel-service-registry"
     depends_on:
       - "basel-config"
+      - "basel-service-registry"
     ports:
       - 4010:4010
+
+  basel-service-recalculation:
+    build: basel-service-recalculation
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111
+      - BASEL_CONFIG_HOST=basel-config
+      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
+    links:
+      - "basel-config"
+      - "basel-service-registry"
+    depends_on:
+      - "basel-config"
+      - "basel-service-registry"
+    ports:
+      - 4020:4020
 
