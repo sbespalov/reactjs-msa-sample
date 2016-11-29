@@ -25,7 +25,7 @@ class SecurityRecalculateViewComponent extends React.Component {
         if ( this.getIsLoading() ) {
             $( this.getRecalculateResultTableElement() ).loading( 'start' );
         }
-        this.props.remoteFindRecalculationResultList({});
+        this.props.remoteFindRecalculationResultList( {});
 
     }
 
@@ -74,8 +74,7 @@ class SecurityRecalculateViewComponent extends React.Component {
         return;
     }
 
-    handleCloseFilterSettings( isCancel ) {
-        var filterValue = this.refs.resultListFilterDetailForm.getValue();
+    handleCloseFilterSettings( filterValue ) {
         this.props.applyFindRecalculationResultListFilter( filterValue );
     }
 
@@ -126,7 +125,6 @@ class SecurityRecalculateViewComponent extends React.Component {
             </div>
 
             <Modal show={this.props.showFilterSettings}
-                onHide={( eventKey ) => { this.handleCloseFilterSettings( true ) } }
                 onEntered={this.handleShowFilterSettings}>
                 <Modal.Header closeButton>
                     <Modal.Title>Filter</Modal.Title>
@@ -184,8 +182,8 @@ class SecurityRecalculateViewComponent extends React.Component {
                     </CommonForm>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={( eventKey ) => { this.handleCloseFilterSettings() } }>Ok</Button>
-                    <Button onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.resultListFilterDetailForm.getValue() ) } }>Cancel</Button>
+                    <Button onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.resultListFilterDetailForm.getValue() ) } }>Ok</Button>
+                    <Button onClick={( eventKey ) => { this.handleCloseFilterSettings() } }>Cancel</Button>
                 </Modal.Footer>
             </Modal>
 
