@@ -32,9 +32,9 @@ export const actionCreators = {
                         })
                     });
                 hashHistory.push('/');
-            }).fail((jqXHR)=>{
+            }).fail((xhr)=>{
                 console.log( 'Fail');
-                if (jqXHR.status != '401'){
+                if (xhr.status != '401'){
                     return;
                 }
                 dispatch( {

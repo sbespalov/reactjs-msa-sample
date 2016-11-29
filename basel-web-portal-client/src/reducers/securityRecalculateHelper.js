@@ -1,5 +1,6 @@
 import {List, Map} from 'immutable';
 import Immutable from 'immutable';
+import AppContext from 'AppContext';
 
 export const actionCreators = {
 
@@ -18,7 +19,10 @@ export const actionCreators = {
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify( request ),
-                dataType: 'json'
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "Bearer " + AppContext.getUser().jwt);
+                }                                
             }).done( function( responseData, status ) {
                 console.log( 'Response' );
                 dispatch( {
