@@ -5,4 +5,10 @@
 		<email>sbespalov@wellink.ru</email>
 		<password>123</password>
 	</user>
+	<user>
+		<firstName>John</firstName>
+		<lastName>Snow</lastName>
+		<email>jsnow@wellink.ru</email>
+		<password>123</password>
+	</user>	
 </user-storage>
