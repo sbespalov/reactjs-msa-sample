@@ -29,13 +29,27 @@ export const actionCreators = {
                     type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE',
                     result: Immutable.fromJS( {
                         loading: false,
+                        failed: false,
                         data: responseData.recalculationResultList,
                         pageNumber: responseData.pageResponse.pageNumber,
                         pageSize: responseData.pageResponse.pageSize,
                         totalCount: responseData.pageResponse.totalCount
                     })
                 });
-            });
+            }).fail((xhr)=>{
+                console.log( 'Fail');
+                dispatch( {
+                    type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE',
+                    result: Immutable.fromJS( {
+                        loading: false,
+                        failed: true,
+                        data: {},
+                        pageNumber: 0,
+                        pageSize: 0,
+                        totalCount: 0
+                    })
+                });
+            });;
         };
     },
     

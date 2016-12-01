@@ -24,6 +24,10 @@ class SecurityRecalculateViewComponent extends React.Component {
         $( this.getRecalculateResultTableElement() ).loading( { zIndex: 5 });
         if ( this.getIsLoading() ) {
             $( this.getRecalculateResultTableElement() ).loading( 'start' );
+        } else if ( this.getIsFailed() ) {
+            $( this.getRecalculateResultTableElement() ).loading( {
+                message: 'Failed to load...'
+            });
         }
         this.props.remoteFindRecalculationResultList( {});
 
@@ -39,6 +43,12 @@ class SecurityRecalculateViewComponent extends React.Component {
         console.log( '#Update' );
         if ( this.getIsLoading() ) {
             $( this.getRecalculateResultTableElement() ).loading( 'start' );
+        } else if ( this.getIsFailed() ) {
+            $( this.getRecalculateResultTableElement() ).loading( 'stop' );
+            $( this.getRecalculateResultTableElement() ).loading( 'destroy' );
+            $( this.getRecalculateResultTableElement() ).loading( {
+                message: 'Failed to load...'
+            });
         } else {
             $( this.getRecalculateResultTableElement() ).loading( 'stop' );
         }
@@ -54,6 +64,10 @@ class SecurityRecalculateViewComponent extends React.Component {
 
     getIsLoading() {
         return this.props.loading || false;
+    }
+
+    getIsFailed() {
+        return this.props.failed || false;
     }
 
     getCurrentPage() {
@@ -200,6 +214,7 @@ function mapStateToProps( state ) {
         pageNumber: state.getIn( ['recalculationResultList', 'pageNumber'] ),
         totalCount: state.getIn( ['recalculationResultList', 'totalCount'] ),
         loading: state.getIn( ['recalculationResultList', 'loading'] ),
+        failed: state.getIn( ['recalculationResultList', 'failed'] ),
         showFilterSettings: state.get( 'showFilterSettings' )
     };
 }
