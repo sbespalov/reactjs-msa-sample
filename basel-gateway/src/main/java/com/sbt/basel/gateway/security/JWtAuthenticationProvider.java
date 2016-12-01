@@ -24,32 +24,28 @@ public class JWtAuthenticationProvider implements AuthenticationProvider
 {
 
     private Key key;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
-    public
-           void init(@Value("${basel.security.jwtSecret}") String secret) throws UnsupportedEncodingException
+    public void init(@Value("${basel.security.jwtSecret}") String secret) throws UnsupportedEncodingException
     {
 
         key = new HmacKey(secret.getBytes("UTF-8"));
     }
 
     @Override
-    public
-           Authentication authenticate(Authentication authentication) throws AuthenticationException
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException
     {
 
         JWTAuthentication jwtAuthentication = (JWTAuthentication) authentication;
         String token = jwtAuthentication.getToken();
 
         JwtConsumer jwtConsumer = new JwtConsumerBuilder()
-//                .setRequireExpirationTime()
-//                .setMaxFutureValidityInMinutes(300)
-                .setRequireSubject()
-                .setVerificationKey(key)
-                .setRelaxVerificationKeyValidation()
-                .build();
+                // .setRequireExpirationTime()
+                // .setMaxFutureValidityInMinutes(300)
+                .setRequireSubject().setVerificationKey(key).setRelaxVerificationKeyValidation().build();
 
         JwtClaims jwtClaims;
         String userName;
@@ -76,8 +72,7 @@ public class JWtAuthenticationProvider implements AuthenticationProvider
     }
 
     @Override
-    public
-           boolean supports(Class<?> authentication)
+    public boolean supports(Class<?> authentication)
     {
         return JWTAuthentication.class.isAssignableFrom(authentication);
     }

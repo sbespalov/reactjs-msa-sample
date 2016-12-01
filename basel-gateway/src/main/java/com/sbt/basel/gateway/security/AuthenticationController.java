@@ -26,12 +26,12 @@ public class AuthenticationController implements AuthenticationApi
 {
 
     private Key key;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
-    public
-           void init(@Value("${basel.security.jwtSecret}") String secret)
+    public void init(@Value("${basel.security.jwtSecret}") String secret)
     {
 
         try
@@ -45,8 +45,7 @@ public class AuthenticationController implements AuthenticationApi
     }
 
     @RequestMapping("/authenticate")
-    public
-           BslAuthenticateResponse authenticate() throws Exception
+    public BslAuthenticateResponse authenticate() throws Exception
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         BslUserDetails user = (BslUserDetails) authentication.getPrincipal();
@@ -64,8 +63,9 @@ public class AuthenticationController implements AuthenticationApi
         // token
         // // is not yet valid (2 minutes
         // // ago)
-        claims.setSubject(user.getUsername()); // the subject/principal is whom the token
-                                     // is about
+        claims.setSubject(user.getUsername()); // the subject/principal is whom
+                                               // the token
+        // is about
         claims.setClaim("credentials", credentials); // additional
                                                      // claims/attributes about
                                                      // the subject can be

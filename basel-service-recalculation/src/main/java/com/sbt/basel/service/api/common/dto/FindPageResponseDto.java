@@ -1,46 +1,57 @@
 package com.sbt.basel.service.api.common.dto;
 
-public class FindPageResponseDto {
+public class FindPageResponseDto
+{
 
-	public static final int DEFAULT_PAGE_SIZE = 20;
+    public static final int DEFAULT_PAGE_SIZE = 20;
 
-	private Integer pageNumber;
-	private Integer pageSize;
-	private Long totalCount;
+    private Integer pageNumber;
 
-	public FindPageResponseDto() {
-		super();
-	}
+    private Integer pageSize;
 
-	public FindPageResponseDto(Integer currentPageNumber, Integer currentPageSize, Long count) {
-		super();
-		this.pageNumber = currentPageNumber;
-		this.pageSize = currentPageSize;
-		this.totalCount = count;
-	}
+    private Long totalCount;
 
-	public Integer getPageNumber() {
-		return pageNumber;
-	}
+    public FindPageResponseDto()
+    {
+        super();
+    }
 
-	public void setPageNumber(Integer pageNumber) {
-		this.pageNumber = pageNumber;
-	}
+    public FindPageResponseDto(Integer currentPageNumber, Integer currentPageSize, Long count)
+    {
+        super();
+        this.pageNumber = currentPageNumber;
+        this.pageSize = currentPageSize;
+        this.totalCount = count;
+    }
 
-	public Integer getPageSize() {
-		return pageSize;
-	}
+    public Integer getPageNumber()
+    {
+        return pageNumber;
+    }
 
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
-	}
+    public void setPageNumber(Integer pageNumber)
+    {
+        this.pageNumber = pageNumber;
+    }
 
-	public Long getTotalCount() {
-		return totalCount;
-	}
+    public Integer getPageSize()
+    {
+        return pageSize;
+    }
 
-	public void setTotalCount(Long count) {
-		this.totalCount = count;
-	}
+    public void setPageSize(Integer pageSize)
+    {
+        this.pageSize = pageSize;
+    }
+
+    public Long getTotalCount()
+    {
+        return totalCount;
+    }
+
+    public void setTotalCount(Long count)
+    {
+        this.totalCount = count;
+    }
 
 }

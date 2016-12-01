@@ -16,14 +16,12 @@ public class UserStorage
     private List<User> userList = new ArrayList<>();
 
     @XmlElement(name = "user")
-    public
-           List<User> getUserList()
+    public List<User> getUserList()
     {
         return userList;
     }
 
-    public
-           void setUserList(List<User> userList)
+    public void setUserList(List<User> userList)
     {
         this.userList = userList;
     }

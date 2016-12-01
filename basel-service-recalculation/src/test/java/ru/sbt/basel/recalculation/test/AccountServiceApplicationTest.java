@@ -11,11 +11,13 @@ import com.sbt.basel.service.recalculation.RecalculationApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = RecalculationApplication.class)
 @WebAppConfiguration
-public class AccountServiceApplicationTest {
+public class AccountServiceApplicationTest
+{
 
-	@Test
-	public void contextLoads() {
+    @Test
+    public void contextLoads()
+    {
 
-	}
+    }
 
 }

@@ -25,14 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
 
     @Autowired
-    public
-           void configureGlobal(
-                                AuthenticationManagerBuilder auth,
-                                @Qualifier("userDetailsAuthenticationProvider") AuthenticationProvider userDetailsAuthenticationProvider,
-                                @Qualifier("jwtAuthenticationProvider") AuthenticationProvider jwtAuthenticationProvider) throws Exception
+    public void configureGlobal(AuthenticationManagerBuilder auth,
+            @Qualifier("userDetailsAuthenticationProvider") AuthenticationProvider userDetailsAuthenticationProvider,
+            @Qualifier("jwtAuthenticationProvider") AuthenticationProvider jwtAuthenticationProvider) throws Exception
     {
-        auth.authenticationProvider(userDetailsAuthenticationProvider)
-                .authenticationProvider(jwtAuthenticationProvider).eraseCredentials(false);
+        auth.authenticationProvider(userDetailsAuthenticationProvider).authenticationProvider(jwtAuthenticationProvider)
+                .eraseCredentials(false);
 
     }
 
@@ -42,17 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     {
 
         @Override
-        protected
-                  void configure(HttpSecurity http) throws Exception
+        protected void configure(HttpSecurity http) throws Exception
         {
-            http.sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .antMatcher("/authenticate")
-                    .authorizeRequests()
-                    .antMatchers("/authenticate")
-                    .authenticated()
-                    .and()
+            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                    .antMatcher("/authenticate").authorizeRequests().antMatchers("/authenticate").authenticated().and()
                     .httpBasic();
         }
     }
@@ -63,40 +54,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     {
 
         @Override
-        protected
-                  void configure(HttpSecurity http) throws Exception
+        protected void configure(HttpSecurity http) throws Exception
         {
 
             JWTAuthenticationFilter jwtFilter = new JWTAuthenticationFilter(authenticationManager());
 
-            http.sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .authorizeRequests()
-                    .antMatchers("/", "/*.js", "/*.css", "/logout")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated()
-                    .and()
-                    .addFilterAfter(jwtFilter,
-                            BasicAuthenticationFilter.class)
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/")
-                    .and()
-                    .exceptionHandling()
-                    .authenticationEntryPoint(new Http401AuthenticationEntryPoint("Bearer"))
-                    .and()
-                    .csrf()
-                    .disable();
+            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+                    .antMatchers("/", "/*.js", "/*.css", "/logout").permitAll().anyRequest().authenticated().and()
+                    .addFilterAfter(jwtFilter, BasicAuthenticationFilter.class).logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and()
+                    .exceptionHandling().authenticationEntryPoint(new Http401AuthenticationEntryPoint("Bearer")).and()
+                    .csrf().disable();
 
         }
 
     }
 
     @Bean
-    public
-           AuthenticationProvider userDetailsAuthenticationProvider(UserDetailsService userDetailsService)
+    public AuthenticationProvider userDetailsAuthenticationProvider(UserDetailsService userDetailsService)
     {
         DaoAuthenticationProvider result = new DaoAuthenticationProvider();
         result.setUserDetailsService(userDetailsService);
@@ -104,8 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     @Bean
-    public
-           AuthenticationProvider jwtAuthenticationProvider()
+    public AuthenticationProvider jwtAuthenticationProvider()
     {
         return new JWtAuthenticationProvider();
     }

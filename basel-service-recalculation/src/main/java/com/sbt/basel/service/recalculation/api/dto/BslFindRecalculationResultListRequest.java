@@ -4,43 +4,55 @@ import java.util.Date;
 
 import com.sbt.basel.service.api.common.dto.FindPageRequestDto;
 
-public class BslFindRecalculationResultListRequest {
+public class BslFindRecalculationResultListRequest
+{
 
-	private String calculationDetail;
-	private Date dateFrom;
-	private Date dateTo;
-	private FindPageRequestDto pageRequest = new FindPageRequestDto();
+    private String calculationDetail;
 
-	public String getCalculationDetail() {
-		return calculationDetail;
-	}
+    private Date dateFrom;
 
-	public void setCalculationDetail(String calculationDetail) {
-		this.calculationDetail = calculationDetail;
-	}
+    private Date dateTo;
 
-	public Date getDateFrom() {
-		return dateFrom;
-	}
+    private FindPageRequestDto pageRequest = new FindPageRequestDto();
 
-	public void setDateFrom(Date dateFrom) {
-		this.dateFrom = dateFrom;
-	}
+    public String getCalculationDetail()
+    {
+        return calculationDetail;
+    }
 
-	public Date getDateTo() {
-		return dateTo;
-	}
+    public void setCalculationDetail(String calculationDetail)
+    {
+        this.calculationDetail = calculationDetail;
+    }
 
-	public void setDateTo(Date dateTo) {
-		this.dateTo = dateTo;
-	}
+    public Date getDateFrom()
+    {
+        return dateFrom;
+    }
 
-	public FindPageRequestDto getPageRequest() {
-		return pageRequest;
-	}
+    public void setDateFrom(Date dateFrom)
+    {
+        this.dateFrom = dateFrom;
+    }
 
-	public void setPageRequest(FindPageRequestDto pageRequest) {
-		this.pageRequest = pageRequest;
-	}
+    public Date getDateTo()
+    {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo)
+    {
+        this.dateTo = dateTo;
+    }
+
+    public FindPageRequestDto getPageRequest()
+    {
+        return pageRequest;
+    }
+
+    public void setPageRequest(FindPageRequestDto pageRequest)
+    {
+        this.pageRequest = pageRequest;
+    }
 
 }

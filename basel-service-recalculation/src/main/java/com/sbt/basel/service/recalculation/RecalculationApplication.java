@@ -15,72 +15,76 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @SpringBootApplication
-//@EnableResourceServer
+// @EnableResourceServer
 @EnableDiscoveryClient
-//@EnableOAuth2Client
+// @EnableOAuth2Client
 @EnableFeignClients
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableConfigurationProperties
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
+// @EnableConfigurationProperties
 @Configuration
-public class RecalculationApplication {
+public class RecalculationApplication
+{
 
-	// @Autowired
-	// private ResourceServerProperties sso;
+    // @Autowired
+    // private ResourceServerProperties sso;
 
-	public static void main(String[] args) {
-		SpringApplication.run(RecalculationApplication.class, args);
-	}
+    public static void main(String[] args)
+    {
+        SpringApplication.run(RecalculationApplication.class, args);
+    }
 
-	@Bean
-	public MappingJackson2HttpMessageConverter jacksonHttpMessageConverter() {
-		MappingJackson2HttpMessageConverter jmc = new MappingJackson2HttpMessageConverter();
-		jmc.getObjectMapper().setDateFormat(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"));
-		return jmc;
-	}
+    @Bean
+    public MappingJackson2HttpMessageConverter jacksonHttpMessageConverter()
+    {
+        MappingJackson2HttpMessageConverter jmc = new MappingJackson2HttpMessageConverter();
+        jmc.getObjectMapper().setDateFormat(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"));
+        return jmc;
+    }
 
-	@Bean
-	public FormHttpMessageConverter formHttpMessageConverter() {
-		return new FormHttpMessageConverter();
-	}
+    @Bean
+    public FormHttpMessageConverter formHttpMessageConverter()
+    {
+        return new FormHttpMessageConverter();
+    }
 
-	@Bean
-	public RequestMappingHandlerAdapter requestMappingHandlerAdapter(
-			MappingJackson2HttpMessageConverter jacksonHttpMessageConverter,
-			FormHttpMessageConverter formHttpMessageConverter) {
-		RequestMappingHandlerAdapter result = new RequestMappingHandlerAdapter();
-		result.setMessageConverters(
-				Arrays.asList(new HttpMessageConverter[] { jacksonHttpMessageConverter }));
-		return result;
-	}
+    @Bean
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter(
+            MappingJackson2HttpMessageConverter jacksonHttpMessageConverter,
+            FormHttpMessageConverter formHttpMessageConverter)
+    {
+        RequestMappingHandlerAdapter result = new RequestMappingHandlerAdapter();
+        result.setMessageConverters(Arrays.asList(new HttpMessageConverter[] { jacksonHttpMessageConverter }));
+        return result;
+    }
 
-	// @Bean
-	// @ConfigurationProperties(prefix = "security.oauth2.client")
-	// public ClientCredentialsResourceDetails
-	// clientCredentialsResourceDetails() {
-	// return new ClientCredentialsResourceDetails();
-	// }
+    // @Bean
+    // @ConfigurationProperties(prefix = "security.oauth2.client")
+    // public ClientCredentialsResourceDetails
+    // clientCredentialsResourceDetails() {
+    // return new ClientCredentialsResourceDetails();
+    // }
 
-	// @Bean
-	// public RequestInterceptor oauth2FeignRequestInterceptor(){
-	// return new OAuth2FeignRequestInterceptor(new
-	// DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
-	// }
+    // @Bean
+    // public RequestInterceptor oauth2FeignRequestInterceptor(){
+    // return new OAuth2FeignRequestInterceptor(new
+    // DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
+    // }
 
-	// @Bean
-	// public OAuth2RestTemplate clientCredentialsRestTemplate() {
-	// return new OAuth2RestTemplate(clientCredentialsResourceDetails());
-	// }
+    // @Bean
+    // public OAuth2RestTemplate clientCredentialsRestTemplate() {
+    // return new OAuth2RestTemplate(clientCredentialsResourceDetails());
+    // }
 
-	// @Bean
-	// public ResourceServerTokenServices tokenServices() {
-	// return new CustomUserInfoTokenServices(sso.getUserInfoUri(),
-	// sso.getClientId());
-	// }
-	//
-	// @Override
-	// public void configure(HttpSecurity http) throws Exception {
-	// http.authorizeRequests()
-	// .antMatchers("/" , "/demo").permitAll()
-	// .anyRequest().authenticated();
-	// }
+    // @Bean
+    // public ResourceServerTokenServices tokenServices() {
+    // return new CustomUserInfoTokenServices(sso.getUserInfoUri(),
+    // sso.getClientId());
+    // }
+    //
+    // @Override
+    // public void configure(HttpSecurity http) throws Exception {
+    // http.authorizeRequests()
+    // .antMatchers("/" , "/demo").permitAll()
+    // .anyRequest().authenticated();
+    // }
 }

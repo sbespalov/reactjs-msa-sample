@@ -22,8 +22,7 @@ public class XMlUserDetailsService implements UserDetailsService
     private UserStorage userStorate = new UserStorage();
 
     @PostConstruct
-    public
-           void init() throws Exception
+    public void init() throws Exception
     {
         JAXBContext jaxbContext = JAXBContext.newInstance(UserStorage.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -31,12 +30,13 @@ public class XMlUserDetailsService implements UserDetailsService
     }
 
     @Override
-    public
-           UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
     {
-        UserDetails result = userStorate.getUserList().stream().filter((user) -> {
+        UserDetails result = userStorate.getUserList().stream().filter((user) ->
+        {
             return user.getEmail().equals(email);
-        }).map((user) -> {
+        }).map((user) ->
+        {
             return toUser(user);
         }).findFirst().orElseThrow(
                 () -> new UsernameNotFoundException(String.format("User not found: userName-[%s]", email)));
@@ -45,8 +45,7 @@ public class XMlUserDetailsService implements UserDetailsService
 
     }
 
-    private
-            User toUser(com.sbt.basel.gateway.domain.User user)
+    private User toUser(com.sbt.basel.gateway.domain.User user)
     {
         BslUserDetails result = new BslUserDetails(user.getEmail(), user.getPassword(),
                 Arrays.asList(new GrantedAuthority[] {}));

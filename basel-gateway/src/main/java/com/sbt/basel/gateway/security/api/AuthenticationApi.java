@@ -5,7 +5,6 @@ import com.sbt.basel.gateway.security.api.dto.BslAuthenticateResponse;
 public interface AuthenticationApi
 {
 
-    public
-           BslAuthenticateResponse authenticate() throws Exception;
+    public BslAuthenticateResponse authenticate() throws Exception;
 
 }

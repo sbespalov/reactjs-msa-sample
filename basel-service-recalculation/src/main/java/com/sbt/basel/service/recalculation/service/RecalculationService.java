@@ -9,28 +9,31 @@ import org.springframework.stereotype.Service;
 import com.sbt.basel.service.recalculation.domain.RecalculationResultDto;
 
 @Service
-public class RecalculationService {
+public class RecalculationService
+{
 
-//	@Autowired
-//	private JdbcTemplate jdbcTemplate;
+    // @Autowired
+    // private JdbcTemplate jdbcTemplate;
 
-	public List<RecalculationResultDto> findRecalculationResultList() {
+    public List<RecalculationResultDto> findRecalculationResultList()
+    {
 
-		//jdbcTemplate.execute("select 1 from dual");
+        // jdbcTemplate.execute("select 1 from dual");
 
-		List<RecalculationResultDto> result = new ArrayList<>();
+        List<RecalculationResultDto> result = new ArrayList<>();
 
-		for (int i = 0; i < 10; i++) {
-			RecalculationResultDto item = new RecalculationResultDto();
-			result.add(item);
+        for (int i = 0; i < 10; i++)
+        {
+            RecalculationResultDto item = new RecalculationResultDto();
+            result.add(item);
 
-			item.setAskCalculateDetail("askCalculateDetail");
-			item.setBidCalculateResult("bidCalculateResult");
-			item.setDate(new Date());
-			item.setSecurity("security");
-		}
+            item.setAskCalculateDetail("askCalculateDetail");
+            item.setBidCalculateResult("bidCalculateResult");
+            item.setDate(new Date());
+            item.setSecurity("security");
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

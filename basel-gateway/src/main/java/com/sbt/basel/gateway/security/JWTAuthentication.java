@@ -10,11 +10,12 @@ public class JWTAuthentication extends AbstractAuthenticationToken
 {
 
     private String token;
+
     private UserDetails userDetails;
 
     public JWTAuthentication(String token)
     {
-        super(Arrays.asList(new GrantedAuthority[]{}));
+        super(Arrays.asList(new GrantedAuthority[] {}));
         this.token = token;
     }
 
