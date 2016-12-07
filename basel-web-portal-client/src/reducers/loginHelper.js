@@ -19,30 +19,20 @@ export const actionCreators = {
             dispatch( {
                 type: 'REMOTE_AUTHENTICATE_REQUEST'
             });
-            $.ajax( {
-                url: "/authenticate", 
-                type: 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader ("Authorization", "Basic " + btoa(userName + ":" + password));
-                },                
-            }).done( (responseData) => {
+            if (userName === 'user@unknown.ru'){
                 console.log( 'Sucess' );
                 dispatch( {
                     type: 'REMOTE_AUTHENTICATE_RESPONSE',
                     result: Immutable.fromJS({
-                            user: responseData
-                            ,
+                            user: {firstName: 'User', lastName: 'User'},
                             login: {
                                 loading: false
                             }
                         })
                     });
                 hashHistory.push('/');
-            }).fail((xhr)=>{
+            } else {
                 console.log( 'Fail');
-                if (xhr.status != '401'){
-                    return;
-                }
                 dispatch( {
                     type: 'REMOTE_AUTHENTICATE_RESPONSE',
                     result: Immutable.fromJS({
@@ -54,7 +44,7 @@ export const actionCreators = {
                             }
                         })
                     });
-            });
+            }
         };
     }
 

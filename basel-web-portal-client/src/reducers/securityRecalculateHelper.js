@@ -14,42 +14,33 @@ export const actionCreators = {
                 type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_REQUEST',
                 request
             });
-            $.ajax( {
-                url: "/recalculation/findRecalculationResultList", 
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify( request ),
-                dataType: 'json',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader ("Authorization", "Bearer " + AppContext.getUser().jwt);
-                }                                
-            }).done( function( responseData, status ) {
-                console.log( 'Response' );
-                dispatch( {
-                    type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE',
-                    result: Immutable.fromJS( {
-                        loading: false,
-                        failed: false,
-                        data: responseData.recalculationResultList,
-                        pageNumber: responseData.pageResponse.pageNumber,
-                        pageSize: responseData.pageResponse.pageSize,
-                        totalCount: responseData.pageResponse.totalCount
-                    })
-                });
-            }).fail((xhr)=>{
-                console.log( 'Fail');
-                dispatch( {
-                    type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE',
-                    result: Immutable.fromJS( {
-                        loading: false,
-                        failed: true,
-                        data: {},
-                        pageNumber: 0,
-                        pageSize: 0,
-                        totalCount: 0
-                    })
-                });
-            });;
+            console.log( 'Response' );
+            dispatch( {
+                type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE',
+                result: Immutable.fromJS( {
+                    loading: false,
+                    failed: false,
+                    data: [{
+                                date: new Date(),
+                                security: 'security',
+                                bidCalculateResult: 'bidCalculateResult',
+                                askCalculateDetail: 'askCalculateDetail'
+                        },{
+                            date: new Date(),
+                            security: 'security',
+                            bidCalculateResult: 'bidCalculateResult',
+                            askCalculateDetail: 'askCalculateDetail'
+                        },{
+                            date: new Date(),
+                            security: 'security',
+                            bidCalculateResult: 'bidCalculateResult',
+                            askCalculateDetail: 'askCalculateDetail'
+                    }],
+                    pageNumber: 1,
+                    pageSize: 10,
+                    totalCount: 100
+                })
+            });
         };
     },
     
