@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
-import { hashHistory } from 'react-router'
 import { Link } from 'react-router'
 
 
@@ -18,9 +17,8 @@ export default React.createClass( {
         if (activeMenuItemKey === this.getActiveMenuItemKey()){
             return;
         }
-        this.props.onMenuItemSelect( activeMenuItemKey );
+        this.props.onMenuItemSelect( activeMenuItemKey, this.navItemMap[activeMenuItemKey]);
         //this.props.dispatch(pushState(null, `/login?next=${redirectAfterLogin}`));        
-        hashHistory.push(this.navItemMap[activeMenuItemKey]);
     },
 
     addOnClickNavigation: function( component, routeLocation ) {
@@ -34,30 +32,30 @@ export default React.createClass( {
         });
     },
 
-    renderNavItem: function(navItem, isNesteed){
+    renderNavItem: function(navItem, isNesteed){     
         var componentInstance = this;
         this.navItemMap = this.navItemMap || {};
-        this.navItemMap[navItem.get('id')] = navItem.get('location');
-        if (navItem.get('items')){
+        this.navItemMap[navItem['id']] = navItem['location'];
+        if (navItem['items']){
             return <NavDropdown
-                id={navItem.get('id')}
-                key={navItem.get('id')}
-                eventKey={navItem.get('id')}
-                title={navItem.get('title')}
+                id={navItem['id']}
+                key={navItem['id']}
+                eventKey={navItem['id']}
+                title={navItem['title']}
                 role="menuitem"
-                open={this.getActiveMenuItemKey() && this.getActiveMenuItemKey().startsWith( navItem.get('id') ) }
-                ref={( targetComponent ) => { targetComponent && componentInstance.addOnClickNavigation( targetComponent, navItem.get('location') ) } }>
+                open={this.getActiveMenuItemKey() && this.getActiveMenuItemKey().startsWith( navItem['id'] ) }
+                ref={( targetComponent ) => { targetComponent && componentInstance.addOnClickNavigation( targetComponent, navItem['location'] ) } }>
                     {
-                        navItem.get('items').map( (subItem) => {
+                        navItem['items'].map( (subItem) => {
                             return componentInstance.renderNavItem(subItem, true);
                         })
                     }
             </NavDropdown>;
         };
         if (isNesteed){
-            return <MenuItem key={navItem.get('id')} eventKey={navItem.get('id')}>{navItem.get('title')}</MenuItem>;
+            return <MenuItem key={navItem['id']} eventKey={navItem['id']}>{navItem['title']}</MenuItem>;
         }
-        return <NavItem key={navItem.get('id')} eventKey={navItem.get('id')}>{navItem.get('title')}</NavItem>;
+        return <NavItem key={navItem['id']} eventKey={navItem['id']}>{navItem['title']}</NavItem>;
     },
     
     render: function() {

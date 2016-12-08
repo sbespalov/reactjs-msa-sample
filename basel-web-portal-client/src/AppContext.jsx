@@ -1,38 +1,46 @@
 import {observableFromStore} from './reduxStoreObserver';
 
-export default AppContext = {
+export default {
 
     store: null,
-    observableState: null,
+    observableState$: null,
 
     getObservableState: function() {
         return this.observableState;
     },
 
-    getUser: function(){
-        if (!this.store){
-            return undefined;
-        }
-        var security = this.store.getState().security
-        if (!security || !security.get){
-            return undefined;
-        }
-        var user = this.store.getState().security.get('user')
-        return user ? user.toJS() : undefined; 
-    },
-    
-    getState: function() {
-        return this.store.getState();
-    },
-    
-    getStore: function() {
-        return this.store;
+    getUser: function() {
+        return this.user;
     },
 
-    setStore: function( createdStore ) {
+    setUser: function( user ) {
+        this.user = user;
+    },
+
+    init: function( createdStore ) {
+        var that = this;
+
         this.store = createdStore;
 
-        this.observableState = observableFromStore( this.store );
+        this.observableState$ = observableFromStore( this.store );
+
+        this.observableState$
+            .map( state => state.security )
+            .distinctUntilChanged().subscribe(( val ) => {
+                console.log( 'Auth changed' );
+                if ( !val.toJS ) {
+                    that.user = undefined;
+                    return;
+                }
+                that.user = val.toJS().user;
+            });
+
+        var security = this.store.getState().security
+        if ( !security || !security.get ) {
+            return;
+        }
+        var user = this.store.getState().security.get( 'user' )
+        this.setUser( user ? user.toJS() : undefined );
     }
 
 }

@@ -49,7 +49,7 @@ authChanged$.subscribe(( val ) => {
 
 const history = syncHistoryWithStore( hashHistory, store )
 
-AppContext.setStore( store );
+AppContext.init( store );
 
 ReactDOM.render(
     <Provider store={store}>

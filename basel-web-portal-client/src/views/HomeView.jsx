@@ -7,9 +7,9 @@ export const HomeView = React.createClass( {
 
     componentWillMount: function() {
         var user = AppContext.getUser();
-        user ? hashHistory.push( '/monitoring' ) : hashHistory.push( '/login' );
+        user && user.jwt ? hashHistory.push( '/monitoring' ) : hashHistory.push( '/login' );
     },
-    
+
     render: function() {
         return null;
     }

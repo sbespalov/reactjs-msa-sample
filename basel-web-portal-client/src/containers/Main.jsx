@@ -11,8 +11,8 @@ class Main extends React.Component {
     render() {
         var user = AppContext.getUser();
         var children = this.props.children;
-    
-        if ( user ) {
+
+        if ( user && user.jwt ) {
             return <AuthorizedApp>{children}</AuthorizedApp>;
         }
         return <AnonymousApp>{children}</AnonymousApp>;
