@@ -8,7 +8,7 @@ import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
 //import "eonasdan-bootstrap-datetimepicker";
 import {actionCreators} from 'reducers/securityRecalculateHelper';
-import CommonForm from 'components/common/CommonForm';
+import RecalculationFilterForm from 'components/recalculation/RecalculationFilterForm';
 import {observableFromStore} from 'reduxStoreObserver';
 
 class SecurityRecalculateViewComponent extends React.Component {
@@ -144,56 +144,7 @@ class SecurityRecalculateViewComponent extends React.Component {
                     <Modal.Title>Filter</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CommonForm horizontal ref="resultListFilterDetailForm">
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} md={2}>
-                                Detail
-                            </Col>
-                            <Col md={10}>
-                                <FormControl type="text" placeholder="Bid/Ask Calculate Detail" id="calculationDetail"/>
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} md={2}>
-                                Date
-                            </Col>
-                            <Col md={5}>
-                                <InputGroup
-                                    ref={( targetComponent ) => {
-                                        var targetElement = ReactDOM.findDOMNode( targetComponent );
-                                        $( targetElement ).datetimepicker( {
-                                            viewMode: 'days',
-                                            format: 'YYYY/MM/DD HH:mm:ss'
-                                        });
-
-                                    } }>
-
-                                    <FormControl type="text" placeholder="From" id="dateFrom"/>
-                                    <InputGroup.Addon>
-                                        <Glyphicon glyph="calendar" />
-                                    </InputGroup.Addon>
-                                </InputGroup>
-                            </Col>
-                            <Col md={5}>
-                                <InputGroup
-                                    ref={( targetComponent ) => {
-                                        var targetElement = ReactDOM.findDOMNode( targetComponent );
-                                        $( targetElement ).datetimepicker( {
-                                            viewMode: 'days',
-                                            format: 'YYYY/MM/DD HH:mm:ss'
-                                        });
-
-                                    } }>
-
-                                    <FormControl type="text" placeholder="To" id="dateTo"/>
-                                    <InputGroup.Addon>
-                                        <Glyphicon glyph="calendar" />
-                                    </InputGroup.Addon>
-                                </InputGroup>
-                            </Col>
-                        </FormGroup>
-                    </CommonForm>
+                    <RecalculationFilterForm ref="resultListFilterDetailForm"/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.resultListFilterDetailForm.getValue() ) } }>Ok</Button>
