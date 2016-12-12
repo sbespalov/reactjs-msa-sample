@@ -3,10 +3,21 @@ logging:
     root: DEBUG
 #   org.springframework.security: INFO
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://${BASEL_SERVICE_REGISTRY_HOST:localhost}:4000/eureka/
-      
+
+spring:
+  rabbitmq:
+    host: ${BASEL_RABBITMQ_HOST:localhost}

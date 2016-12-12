@@ -21,6 +21,7 @@
 		<module>basel-gateway</module>
 		<module>basel-web-portal-client</module>
 		<module>basel-service-recalculation</module>
+		<module>basel-service-monitoring</module>
 	</modules>
 
 

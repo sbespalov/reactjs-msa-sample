@@ -1,20 +1,30 @@
 version: '2'
 services:
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"  
+
   basel-config:
     build: basel-config
     environment:
       - CONFIG_SERVICE_PASSWORD=111    
     ports:
       - 8888:8888
+    depends_on:
+      - "rabbitmq"
 
   basel-service-registry:
     build: basel-service-registry
     environment:
       - CONFIG_SERVICE_PASSWORD=111
       - BASEL_CONFIG_HOST=basel-config
+      - BASEL_RABBITMQ_HOST=rabbitmq
     links:
       - "basel-config"
+      - "rabbitmq"
     depends_on:
       - "basel-config"
     ports:
@@ -27,12 +37,15 @@ services:
       - JWT_SECRET=123
       - BASEL_CONFIG_HOST=basel-config
       - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
+      - BASEL_RABBITMQ_HOST=rabbitmq
     links:
       - "basel-config"
       - "basel-service-registry"
+      - "rabbitmq"
     depends_on:
       - "basel-config"
       - "basel-service-registry"
+      - "rabbitmq"
     ports:
       - 4010:4010
 
@@ -42,12 +55,28 @@ services:
       - CONFIG_SERVICE_PASSWORD=111
       - BASEL_CONFIG_HOST=basel-config
       - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
+      - BASEL_RABBITMQ_HOST=rabbitmq
     links:
       - "basel-config"
       - "basel-service-registry"
+      - "rabbitmq"
     depends_on:
       - "basel-config"
       - "basel-service-registry"
     ports:
       - 4020:4020
 
+  basel-service-monitoring:
+    build: basel-service-monitoring
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111
+      - BASEL_CONFIG_HOST=basel-config
+      - BASEL_RABBITMQ_HOST=rabbitmq
+    links:
+      - "basel-config"
+      - "rabbitmq"      
+    depends_on:
+      - "basel-config"          
+    ports:
+      - 9000:8080
+      - 8989:8989
