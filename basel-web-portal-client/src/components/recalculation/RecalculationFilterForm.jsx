@@ -10,6 +10,10 @@ export default class RecalculationFilterForm extends React.Component {
     getValue(){
         return this.refs.resultListFilterDetailForm.getValue();
     }
+
+    setValue(val){
+        this.refs.resultListFilterDetailForm.setValue(val);
+    }
     
     render() {
         return <CommonForm horizontal ref="resultListFilterDetailForm">

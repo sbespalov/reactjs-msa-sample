@@ -11,11 +11,18 @@ class CommonForm extends Form {
     getValue() {
         var value = {};
         var element = ReactDOM.findDOMNode( this );
-        var id = $(element).find('input').each((i,e)=>{
+        $(element).find('input').each((i,e)=>{
             value[e.id]=e.value;
         });
 
         return value;
+    }
+    
+    setValue(value){
+        var element = ReactDOM.findDOMNode( this );
+        $(element).find('input').each((i,e)=>{
+            e.value = value[e.id];
+        });        
     }
 
 }

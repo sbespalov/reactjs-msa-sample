@@ -6,12 +6,23 @@ import RecalculationFilterForm from 'components/recalculation/RecalculationFilte
 describe( 'RecalculationFilterForm', () => {
 
     it( 'Get form values', () => {
-        const component = ReactTestUtils.renderIntoDocument(
+        var tree = ReactTestUtils.renderIntoDocument(
             <RecalculationFilterForm/>
         );
 
-        const formInputs = ReactTestUtils.scryRenderedDOMComponentsWithTag( component, 'input' );
+        var formInputs = ReactTestUtils.scryRenderedDOMComponentsWithTag( tree, 'input' );
         expect( formInputs.length ).to.equal( 3 );
+
+        var formValue = {
+            calculationDetail: 'calculationDetail',
+            dateFrom: '2017/01/01 00:00:00',
+            dateTo: '2017/01/01 00:00:00'
+        }
+
+        var componentInstance = ReactTestUtils.findRenderedComponentWithType( tree, RecalculationFilterForm );
+        componentInstance.setValue( formValue );
+
+        expect( componentInstance.getValue() ).to.deep.equal( formValue );
     });
 
 });
