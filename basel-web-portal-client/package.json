@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --progress",
     "build": "NODE_ENV=production webpack --progress",
-    "test": "cross-env NODE_PATH=./src mocha --compilers js:babel-core/register --require ./test/test_helper.js --require ignore-styles \"test/**/*@(.js|.jsx)\""
+    "test": "cross-env NODE_PATH=./src:./lib mocha --compilers js:babel-core/register --require ./test/test_helper.js --require ignore-styles \"test/**/*@(.js|.jsx)\""
   },
   "babel": {
     "presets": [

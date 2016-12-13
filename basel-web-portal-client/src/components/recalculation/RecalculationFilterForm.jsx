@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Glyphicon, FormGroup, Col, ControlLabel, FormControl, InputGroup} from 'react-bootstrap';
-import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
+import "bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
 import CommonForm from 'components/common/CommonForm';
 

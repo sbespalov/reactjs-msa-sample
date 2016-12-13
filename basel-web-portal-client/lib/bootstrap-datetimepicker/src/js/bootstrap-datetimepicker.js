@@ -39,7 +39,18 @@
         // AMD is used - Register as an anonymous module.
         define(['jquery', 'moment'], factory);
     } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'), require('moment'));
+        var w = root; // Holds the window or root instance to pass to the plugin
+        if (typeof window !== 'undefined') {
+            w = window;
+        }
+        if (jQuery === undefined) {
+            jQuery = require('jquery')(window);
+        }
+        if (moment === undefined){
+            moment = require('moment');
+        }
+        
+        module.exports = factory(jQuery, moment);
     } else {
         // Neither AMD nor CommonJS used. Use global variables.
         if (typeof jQuery === 'undefined') {
