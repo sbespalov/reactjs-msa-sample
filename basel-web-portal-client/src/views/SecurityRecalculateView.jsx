@@ -8,7 +8,7 @@ import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
 //import "eonasdan-bootstrap-datetimepicker";
 import {actionCreators} from 'reducers/securityRecalculateHelper';
-import RecalculationFilterForm from 'components/recalculation/RecalculationFilterForm';
+import RecalculationFilter from 'components/recalculation/RecalculationFilter';
 import {observableFromStore} from 'reduxStoreObserver';
 
 class SecurityRecalculateViewComponent extends React.Component {
@@ -17,6 +17,7 @@ class SecurityRecalculateViewComponent extends React.Component {
         super( props, context );
         console.log( '#Constructor' );
         this.handlePageSelect = this.handlePageSelect.bind( this );
+        this.handleShowFilterSettings = this.handleShowFilterSettings.bind( this );
     }
 
     componentDidMount() {
@@ -29,8 +30,7 @@ class SecurityRecalculateViewComponent extends React.Component {
                 message: 'Failed to load...'
             });
         }
-        this.props.remoteFindRecalculationResultList( {});
-
+        this.props.remoteFindRecalculationResultList( this.props.filterValue );
     }
 
     componentWillUnmount() {
@@ -92,7 +92,13 @@ class SecurityRecalculateViewComponent extends React.Component {
         this.props.applyFindRecalculationResultListFilter( filterValue );
     }
 
+    handleShowFilterSettings(){
+        this.refs.resultListFilterDetailForm.setValue( this.props.filterValue );        
+    }
+    
     render() {
+        var resultListFilterDetailForm = <RecalculationFilter ref="resultListFilterDetailForm"/>;
+    
         return <div>
             <PageHeader>Security Recalculate
                 <Button bsStyle="link" onClick={this.props.toggleFindRecalculationResultListFilter}>
@@ -144,7 +150,7 @@ class SecurityRecalculateViewComponent extends React.Component {
                     <Modal.Title>Filter</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <RecalculationFilterForm ref="resultListFilterDetailForm"/>
+                    {resultListFilterDetailForm}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.resultListFilterDetailForm.getValue() ) } }>Ok</Button>
@@ -166,7 +172,8 @@ function mapStateToProps( state ) {
         totalCount: state.getIn( ['recalculationResultList', 'totalCount'] ),
         loading: state.getIn( ['recalculationResultList', 'loading'] ),
         failed: state.getIn( ['recalculationResultList', 'failed'] ),
-        showFilterSettings: state.get( 'showFilterSettings' )
+        showFilterSettings: state.get( 'showFilterSettings' ),
+        filterValue: state.getIn( ['recalculationResultList', 'filter'] ).toJS()
     };
 }
 

@@ -12,7 +12,7 @@ export const actionCreators = {
             console.log( 'Request' );
             dispatch( {
                 type: 'REMOTE_FIND_RECALCULATION_RESULT_LIST_REQUEST',
-                request
+                request: Immutable.fromJS(request)
             });
             $.ajax( {
                 url: "/recalculation/findRecalculationResultList", 
@@ -77,9 +77,9 @@ export const actionCreators = {
 export function securityRecalculateReducer( state = Map(), action ) {
     switch ( action.type ) {
         case 'REMOTE_FIND_RECALCULATION_RESULT_LIST_REQUEST':
-            return state.setIn( ['recalculationResultList', 'loading'], true );
+            return state.setIn( ['recalculationResultList', 'loading'], true ).setIn(['recalculationResultList', 'filter'], action.request||{});
         case 'REMOTE_FIND_RECALCULATION_RESULT_LIST_RESPONSE':
-            return state.set('recalculationResultList', action.result );
+            return state.set('recalculationResultList', state.get('recalculationResultList').merge(action.result));
         case 'TOGGLE_FIND_RECALCULATION_RESULT_LIST_FILTER':
             return state.set('showFilterSettings', action.result );
         default:

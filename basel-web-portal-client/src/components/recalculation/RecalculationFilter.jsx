@@ -5,7 +5,7 @@ import "bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
 import CommonForm from 'components/common/CommonForm';
 
-export default class RecalculationFilterForm extends React.Component {
+export default class RecalculationFilter extends React.Component {
 
     getValue(){
         return this.refs.resultListFilterDetailForm.getValue();

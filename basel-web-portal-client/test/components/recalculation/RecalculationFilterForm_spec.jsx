@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
-import RecalculationFilterForm from 'components/recalculation/RecalculationFilterForm';
+import RecalculationFilter from 'components/recalculation/RecalculationFilter';
 
-describe( 'RecalculationFilterForm', () => {
+describe( 'RecalculationFilter', () => {
 
     it( 'Get form values', () => {
         var tree = ReactTestUtils.renderIntoDocument(
-            <RecalculationFilterForm/>
+            <RecalculationFilter/>
         );
 
         var formInputs = ReactTestUtils.scryRenderedDOMComponentsWithTag( tree, 'input' );
@@ -19,7 +19,7 @@ describe( 'RecalculationFilterForm', () => {
             dateTo: '2017/01/01 00:00:00'
         }
 
-        var componentInstance = ReactTestUtils.findRenderedComponentWithType( tree, RecalculationFilterForm );
+        var componentInstance = ReactTestUtils.findRenderedComponentWithType( tree, RecalculationFilter );
         componentInstance.setValue( formValue );
 
         expect( componentInstance.getValue() ).to.deep.equal( formValue );

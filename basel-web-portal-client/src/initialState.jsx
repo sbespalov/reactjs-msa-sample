@@ -5,6 +5,12 @@ const getInitialState = function() {
     var result = {
         navigation: Immutable.fromJS( {
             navItems: navItems
+        }),
+        securityRecalculate: Immutable.fromJS( {
+            recalculationResultList: {
+                filter: {}
+            }
+
         })
     };
 

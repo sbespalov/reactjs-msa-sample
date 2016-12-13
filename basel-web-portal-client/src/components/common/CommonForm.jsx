@@ -21,6 +21,9 @@ class CommonForm extends Form {
     setValue(value){
         var element = ReactDOM.findDOMNode( this );
         $(element).find('input').each((i,e)=>{
+            if (!value[e.id]){
+                return;
+            }
             e.value = value[e.id];
         });        
     }
