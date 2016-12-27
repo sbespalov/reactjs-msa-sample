@@ -34,6 +34,21 @@
 				<artifactId>jose4j</artifactId>
 				<version>0.5.2</version>
 			</dependency>
+		    <dependency>
+		        <groupId>org.springframework.integration</groupId>
+		        <artifactId>spring-integration-core</artifactId>
+		        <version>4.3.5.RELEASE</version>
+		    </dependency>
+			<dependency>
+			    <groupId>com.mchange</groupId>
+			    <artifactId>c3p0</artifactId>
+			    <version>0.9.5.2</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.microsoft.sqlserver</groupId>
+			    <artifactId>mssql-jdbc</artifactId>
+			    <version>6.1.0.jre8</version>
+			</dependency>		
 		</dependencies>
 	</dependencyManagement>
 

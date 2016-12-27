@@ -10,7 +10,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
-
 eureka:
   instance:
     prefer-ip-address: true
@@ -19,5 +18,9 @@ eureka:
       defaultZone: http://${BASEL_SERVICE_REGISTRY_HOST:localhost}:4000/eureka/
 
 spring:
+  jackson:
+    date-format: yyyy/MM/dd HH:mm:ss
   rabbitmq:
     host: ${BASEL_RABBITMQ_HOST:localhost}
+  aop:
+    proxy-target-class: true    

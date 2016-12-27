@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:FIXML xmlns="http://www.w3.org/2000/09/xmldsig#"
+	xmlns:ns2="http://svn.msk.trd.ru/xsd/fixml">
+	<ns2:Batch ID="2a4bb85936cc4878a4ff284cad876289-1">
+		<ns2:BookDef>
+			<ns2:Book ID="11133" Name="COM_CIB" SrcName="MUREX" Typ="TBW_Created"
+				Mode="Regular" OpenFlag="0" ActiveFlag="0" LegalEntity="TD Investments"
+				TraderName="msdschetnikov" Created="5/21/2013 6:35:15 PM" Modified="5/21/2013 6:35:15 PM">
+				<ns2:AID AltID="NameInDiasoft" AltIDSrc="NameInDiasoft" />
+				<ns2:Pty ID="2014-06-18 07:06:02.40" R="68" />
+				<ns2:Pty ID="*TDINV" R="71" />
+				<ns2:Pty ID="20.05.2013 15:33:57" R="8" />
+				<ns2:Pty ID="TD Investments" R="34" />
+				<ns2:Pty ID="2013-05-20" R="2" />
+				<ns2:Pty ID="FX forward" R="5" />
+				<ns2:Pty ID="COM_CIB" R="24" />
+				<ns2:Pty ID="0" R="55" />
+				<ns2:Pty ID="Book for commodities (non-precious metals) deals"
+					R="3" />
+				<ns2:Pty ID="True" R="67" />
+				<ns2:Pty ID="5/20/2013 12:00:00 AM" R="15" />
+				<ns2:Pty ID="Commodity Swaps" R="5" />
+				<ns2:Pty ID="Commodities" R="5" />
+				<ns2:Pty ID="Trading" R="13" />
+				<ns2:Pty ID="FXNDF" R="5" />
+				<ns2:Pty ID="OTC" R="31" />
+				<ns2:Pty ID="Нет" R="21" />
+				<ns2:Pty ID="False" R="35" />
+				<ns2:Pty ID="New product in the new book" R="25" />
+				<ns2:Pty ID="Commodity Futures" R="5" />
+				<ns2:Pty ID="0" R="54" />
+				<ns2:Pty ID="Galishnikova Olga" R="17" />
+				<ns2:Pty ID="False" R="1" />
+				<ns2:Pty ID="Intrabook" R="31" />
+				<ns2:Pty ID="0" R="53" />
+				<ns2:Pty ID="21.05.2013 15:45:35" R="9" />
+				<ns2:Pty ID="Approval not required" R="22" />
+				<ns2:Pty ID="closed" R="4" />
+				<ns2:Pty ID="1010103101" R="7" />
+				<ns2:Pty ID="200000 FICC" R="6" />
+				<ns2:Pty ID="3888" R="65" />
+				<ns2:Pty ID="1010101513 - Ru Mow GM FICC Commodities" R="16" />
+				<ns2:Pty ID="Yes" R="12" />
+				<ns2:Pty ID="FX swap" R="5" />
+				<ns2:Pty ID="Regular" R="33" />
+				<ns2:Pty ID="2014-07-15" R="58" />
+				<ns2:Pty ID="Нет" R="44" />
+				<ns2:Pty ID="205000 Commodities" R="49" />
+				<ns2:Pty ID="Commodity Option" R="5" />
+				<ns2:Pty ID="205020 PreciousMetals" R="29" />
+				<ns2:Pty ID="Commodity Swap" R="5" />
+				<ns2:Pty ID="Treasury Desk - FX Deals" R="20" />
+				<ns2:Pty ID="Commodity NDF" R="5" />
+				<ns2:Pty ID="Commodities Desk" R="10" />
+				<ns2:Pty ID="setting Global Portfolio Code" R="42" />
+			</ns2:Book>
+		</ns2:BookDef>
+		<ns2:BookDef>
+			<ns2:Book ID="11192" Name="SCT_FX" SrcID="902" SrcName="MUREX"
+				Typ="TBW_Unloaded" OpenFlag="0" ActiveFlag="0" LegalEntity="TD Investments"
+				TraderName="msk\astrunilin" Created="5/22/2013 3:44:24 PM" Modified="5/22/2013 3:44:24 PM">
+				<ns2:AID AltID="NameInDiasoft" AltIDSrc="NameInDiasoft" />
+				<ns2:Pty ID="*TDINV" R="71" />
+				<ns2:Pty ID="0" R="54" />
+				<ns2:Pty ID="1010104002" R="7" />
+				<ns2:Pty ID="0" R="53" />
+				<ns2:Pty ID="FX Trading" R="10" />
+				<ns2:Pty ID="closed" R="4" />
+				<ns2:Pty ID="False" R="35" />
+				<ns2:Pty ID="Error" R="64" />
+				<ns2:Pty ID="2013-10-23" R="58" />
+				<ns2:Pty ID="0" R="55" />
+				<ns2:Pty ID="TD Investments" R="34" />
+				<ns2:Pty ID="2015-06-30 16:16:20.573" R="68" />
+			</ns2:Book>
+		</ns2:BookDef>
+	</ns2:Batch>
+</ns2:FIXML>

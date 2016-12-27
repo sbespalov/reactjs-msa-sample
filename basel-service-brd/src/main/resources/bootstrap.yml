@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: basel-service-brd
+  cloud:
+    config:
+      uri: http://${BASEL_CONFIG_HOST:localhost}:8888
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD:111}
+      username: user

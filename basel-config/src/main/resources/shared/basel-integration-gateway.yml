@@ -1,0 +1,10 @@
+server:
+  port: 4015
+  
+basel:
+  integration:
+    brd:
+      jdbcUrl:  jdbc:sqlserver://192.168.12.135;databaseName=SBespalov
+      jdbcUser:  sbespalov
+      jdbcPassword:  12345
+      bookFixmlStorageFolder: /home/sbespalov/projects/basel-msa/basel-integration-gateway/target/bookFixmlTmpStorage

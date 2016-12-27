@@ -1,0 +1,59 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://svn.msk.trd.ru/xsd/fixml" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="FIXML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Batch">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BookDef" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Book">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AID">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="AltID" use="optional"/>
+                                  <xs:attribute type="xs:string" name="AltIDSrc" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Pty" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="ID" use="optional"/>
+                                  <xs:attribute type="xs:byte" name="R" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:short" name="ID" use="optional"/>
+                        <xs:attribute type="xs:string" name="Name" use="optional"/>
+                        <xs:attribute type="xs:string" name="SrcName" use="optional"/>
+                        <xs:attribute type="xs:string" name="Typ" use="optional"/>
+                        <xs:attribute type="xs:string" name="Mode" use="optional"/>
+                        <xs:attribute type="xs:byte" name="OpenFlag" use="optional"/>
+                        <xs:attribute type="xs:byte" name="ActiveFlag" use="optional"/>
+                        <xs:attribute type="xs:string" name="LegalEntity" use="optional"/>
+                        <xs:attribute type="xs:string" name="TraderName" use="optional"/>
+                        <xs:attribute type="xs:string" name="Created" use="optional"/>
+                        <xs:attribute type="xs:string" name="Modified" use="optional"/>
+                        <xs:attribute type="xs:short" name="SrcID" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="ID"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

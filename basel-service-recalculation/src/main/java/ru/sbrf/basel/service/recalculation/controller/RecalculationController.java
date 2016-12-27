@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.sbrf.basel.service.api.common.dto.FindPageRequestDto;
@@ -18,18 +16,15 @@ import ru.sbrf.basel.service.recalculation.domain.RecalculationResultDto;
 import ru.sbrf.basel.service.recalculation.service.RecalculationService;
 
 @RestController
-@RequestMapping("/recalculation")
 public class RecalculationController implements RecalculationServiceApi
 {
 
     @Autowired
     private RecalculationService recalculationService;
 
-    @RequestMapping(path = "/findRecalculationResultList", method = RequestMethod.POST)
     @CrossOrigin
     @Override
-    public BslFindRecalculationResultListResponse findRecalculationResultList(
-            @RequestBody BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest)
+    public BslFindRecalculationResultListResponse findRecalculationResultList(BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest)
     {
         try
         {
