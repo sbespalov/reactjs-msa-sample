@@ -1,6 +1,6 @@
 FROM basel-docker-java:latest
 
-ADD ./target/basel-gateway.jar /app/
-CMD ["java", "-Xmx256m", "-jar", "/app/basel-gateway.jar"]
+ADD ./target/basel-integration-gateway.jar /app/
+CMD ["java", "-Xmx256m", "-jar", "/app/basel-integration-gateway.jar"]
 
-EXPOSE 4010
+EXPOSE 4015

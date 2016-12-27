@@ -1,6 +1,6 @@
 FROM basel-docker-java:latest
 
-ADD ./target/basel-service-recalculation.jar /app/
-CMD ["java", "-Xmx256m", "-jar", "/app/basel-service-recalculation.jar"]
+ADD ./target/basel-service-brd.jar /app/
+CMD ["java", "-Xmx256m", "-jar", "/app/basel-service-brd.jar"]
 
-EXPOSE 4020
+EXPOSE 4030
