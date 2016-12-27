@@ -49,6 +49,24 @@ services:
     ports:
       - 4010:4010
 
+  basel-integration-gateway:
+    build: basel-integration-gateway
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111
+      - BASEL_CONFIG_HOST=basel-config
+      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
+      - BASEL_RABBITMQ_HOST=rabbitmq
+    links:
+      - "basel-config"
+      - "basel-service-registry"
+      - "rabbitmq"
+    depends_on:
+      - "basel-config"
+      - "basel-service-registry"
+      - "rabbitmq"
+    ports:
+      - 4015:4015
+
   basel-service-recalculation:
     build: basel-service-recalculation
     environment:
@@ -65,6 +83,23 @@ services:
       - "basel-service-registry"
     ports:
       - 4020:4020
+
+  basel-service-brd:
+    build: basel-service-brd
+    environment:
+      - CONFIG_SERVICE_PASSWORD=111
+      - BASEL_CONFIG_HOST=basel-config
+      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
+      - BASEL_RABBITMQ_HOST=rabbitmq
+    links:
+      - "basel-config"
+      - "basel-service-registry"
+      - "rabbitmq"
+    depends_on:
+      - "basel-config"
+      - "basel-service-registry"
+    ports:
+      - 4030:4030
 
   basel-service-monitoring:
     build: basel-service-monitoring
