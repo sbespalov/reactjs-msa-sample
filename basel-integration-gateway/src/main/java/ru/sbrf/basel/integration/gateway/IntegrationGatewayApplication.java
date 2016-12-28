@@ -3,17 +3,17 @@ package ru.sbrf.basel.integration.gateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.integration.config.EnableIntegration;
 
 import ru.sbrf.basel.integration.gateway.brd.BrdConfiguration;
-import ru.sbrf.basel.integration.gateway.client.BaselClientRegistry.BookBatchServiceApiClient;
-import ru.sbrf.basel.service.brd.api.dto.BslBookProcessBatchRequest;
 
-@SpringBootApplication(exclude = BatchAutoConfiguration.class)
+@SpringBootApplication(exclude = { BatchAutoConfiguration.class, HibernateJpaAutoConfiguration.class,
+                                   JpaRepositoriesAutoConfiguration.class })
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableIntegration
@@ -23,22 +23,8 @@ public class IntegrationGatewayApplication
 
     public static void main(String[] args)
     {
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(IntegrationGatewayApplication.class,
-                                                                                  args);
-        test(applicationContext.getBean(BookBatchServiceApiClient.class));
+        SpringApplication.run(IntegrationGatewayApplication.class, args);
 
     }
 
-    public static void test(BookBatchServiceApiClient client)
-    {
-        try
-        {
-            client.process(new BslBookProcessBatchRequest());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-    }
 }

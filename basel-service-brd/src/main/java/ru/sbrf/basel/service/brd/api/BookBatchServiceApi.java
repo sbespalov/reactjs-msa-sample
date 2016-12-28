@@ -10,7 +10,7 @@ import ru.sbrf.basel.service.brd.api.dto.BslBookProcessBatchRequest;
 public interface BookBatchServiceApi
 {
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public void process(@RequestBody BslBookProcessBatchRequest bslBookCreateRequest);
+    @RequestMapping(method = RequestMethod.PUT, consumes = {"application/json"})
+    public void process(@RequestBody(required=true) BslBookProcessBatchRequest bslBookCreateRequest);
 
 }

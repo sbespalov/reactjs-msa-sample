@@ -1,7 +1,18 @@
+basel:
+  service:
+    brd:
+      jdbcUrl:  jdbc:sqlserver://192.168.12.135;databaseName=SBespalov;
+      jdbcUser:  sbespalov
+      jdbcPassword:  12345
+
 spring:
-  h2:
-    console:
-      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+            
 server:
   port: 4030
   context-path: /

@@ -24,7 +24,7 @@ public class RecalculationController implements RecalculationServiceApi
 
     @CrossOrigin
     @Override
-    public BslFindRecalculationResultListResponse findRecalculationResultList(BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest)
+    public BslFindRecalculationResultListResponse findRecalculationResultList(@RequestBody BslFindRecalculationResultListRequest bslfindRecalculationResultListRequest)
     {
         try
         {

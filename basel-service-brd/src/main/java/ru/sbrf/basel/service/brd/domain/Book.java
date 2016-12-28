@@ -1,22 +1,37 @@
 package ru.sbrf.basel.service.brd.domain;
 
-public class Book
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import ru.sbrf.basel.service.generic.domain.BslEntityBase;
+
+@Entity
+@AttributeOverrides({
+                      @AttributeOverride(name = "entityId", column = @Column(name = "BookId", insertable = false, updatable = false))
+})
+@Table(name = "`cadBook`", schema = "bsl_brd")
+public class Book extends BslEntityBase
 {
 
-    private String code;
+    private String bookCode;
+    private String bookType;
     private String sourceSystem;
-    private String type;
 
-    public String getCode()
+    @Column(name="BookCode")
+    public String getBookCode()
     {
-        return code;
+        return bookCode;
     }
 
-    public void setCode(String code)
+    public void setBookCode(String code)
     {
-        this.code = code;
+        this.bookCode = code;
     }
 
+    @Column(name="SourceSystem")
     public String getSourceSystem()
     {
         return sourceSystem;
@@ -27,14 +42,15 @@ public class Book
         this.sourceSystem = sourceSystem;
     }
 
-    public String getType()
+    @Column(name="BookType")
+    public String getBookType()
     {
-        return type;
+        return bookType;
     }
 
-    public void setType(String type)
+    public void setBookType(String type)
     {
-        this.type = type;
+        this.bookType = type;
     }
 
 }

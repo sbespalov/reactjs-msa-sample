@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.sbt.basel</groupId>
+		<groupId>ru.sbrf.basel</groupId>
 		<artifactId>basel-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 		<relativePath>../basel-parent</relativePath>
@@ -16,6 +16,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>basel-service-brd</artifactId>
 			<version>${project.version}</version>
+			<classifier>api</classifier>
 		</dependency>
 		<dependency>
 		    <groupId>com.microsoft.sqlserver</groupId>

@@ -1,21 +1,20 @@
 package ru.sbrf.basel.service.brd;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@Configuration
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class BrdApplication
 {
 
@@ -25,26 +24,14 @@ public class BrdApplication
     }
 
     @Bean
-    public MappingJackson2HttpMessageConverter jacksonHttpMessageConverter()
+    public DataSource bookFxmlBufferDataSource(@Value("${basel.service.brd.jdbcUrl}") String jdbcUrl,
+                                               @Value("${basel.service.brd.jdbcUser}") String jdbcUser,
+                                               @Value("${basel.service.brd.jdbcPassword}") String jdbcPassword)
     {
-        MappingJackson2HttpMessageConverter jmc = new MappingJackson2HttpMessageConverter();
-        jmc.getObjectMapper().setDateFormat(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"));
-        return jmc;
-    }
-
-    @Bean
-    public FormHttpMessageConverter formHttpMessageConverter()
-    {
-        return new FormHttpMessageConverter();
-    }
-
-    @Bean
-    public RequestMappingHandlerAdapter requestMappingHandlerAdapter(
-                                                                     MappingJackson2HttpMessageConverter jacksonHttpMessageConverter,
-                                                                     FormHttpMessageConverter formHttpMessageConverter)
-    {
-        RequestMappingHandlerAdapter result = new RequestMappingHandlerAdapter();
-        result.setMessageConverters(Arrays.asList(new HttpMessageConverter[] { jacksonHttpMessageConverter }));
+        ComboPooledDataSource result = new ComboPooledDataSource();
+        result.setJdbcUrl(jdbcUrl);
+        result.setUser(jdbcUser);
+        result.setPassword(jdbcPassword);
         return result;
     }
 

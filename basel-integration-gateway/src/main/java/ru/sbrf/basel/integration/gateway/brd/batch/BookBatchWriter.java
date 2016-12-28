@@ -29,7 +29,6 @@ public class BookBatchWriter implements ItemWriter<Book>
             book.setCode(bookItem.getName());
             book.setSourceSystem(bookItem.getSrcName());
             book.setType(bookItem.getTyp());
-            bslBookProcessRequest.getBookList().add(book);
         }
 
         bookBatchService.process(bslBookProcessRequest);
