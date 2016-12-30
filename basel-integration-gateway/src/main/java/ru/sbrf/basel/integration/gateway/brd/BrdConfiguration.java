@@ -58,7 +58,7 @@ public class BrdConfiguration
 
     private static final String QUERY_SELECT_BOOK_FIXML_BATCH = "SELECT t.FixmlId, t.Value FROM buf.tFixml t WHERE t.MessageType='BOOK' and t.IsComplete = 0";
 
-    @Value("${basel.integration.brd.bookFixmlStorageFolder}")
+    @Value("${basel.integration.brd.storageFolder}")
     private String bookFixmlStorageFolder;
 
     @Autowired
