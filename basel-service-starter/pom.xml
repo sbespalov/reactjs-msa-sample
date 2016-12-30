@@ -9,7 +9,7 @@
 		<relativePath>../basel-parent</relativePath>
 	</parent>
 
-	<artifactId>basel-service-generic</artifactId>
+	<artifactId>basel-service-starter</artifactId>
 
 	<dependencies>
 		<dependency>
