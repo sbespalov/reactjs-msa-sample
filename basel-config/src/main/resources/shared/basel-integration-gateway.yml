@@ -4,7 +4,7 @@ server:
 basel:
   integration:
     brd:
-      jdbcUrl:  jdbc:sqlserver://192.168.12.135;databaseName=SBespalov
-      jdbcUser:  sbespalov
-      jdbcPassword:  12345
-      bookFixmlStorageFolder: /home/sbespalov/projects/basel-msa/basel-integration-gateway/target/bookFixmlTmpStorage
+      jdbcUrl:  ${BASEL_INTAGRATION_BRD_JDBC_URL:jdbc:sqlserver://192.168.12.135;databaseName=SBespalov;}
+      jdbcUser:  ${BASEL_INTAGRATION_BRD_JDBC_USER:sbespalov}
+      jdbcPassword:  ${BASEL_INTAGRATION_BRD_JDBC_PASSWORD:12345}
+      storageFolder: ${BASEL_INTAGRATION_BRD_STORAGE_FOLDER:/home/sbespalov/projects/basel-msa/basel-integration-gateway/target/bookFixmlTmpStorage}

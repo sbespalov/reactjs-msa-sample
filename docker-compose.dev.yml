@@ -1,4 +1,5 @@
 version: '2'
+
 services:
 
   rabbitmq:
@@ -21,10 +22,8 @@ services:
     environment:
       - CONFIG_SERVICE_PASSWORD=111
       - BASEL_CONFIG_HOST=basel-config
-      - BASEL_RABBITMQ_HOST=rabbitmq
     links:
       - "basel-config"
-      - "rabbitmq"
     depends_on:
       - "basel-config"
     ports:
@@ -32,86 +31,89 @@ services:
 
   basel-gateway:
     build: basel-gateway
-    environment:
-      - CONFIG_SERVICE_PASSWORD=111
+    env_file:
+      - docker-compose.dev.env
+    environment:        
       - JWT_SECRET=123
-      - BASEL_CONFIG_HOST=basel-config
-      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
-      - BASEL_RABBITMQ_HOST=rabbitmq
     links:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
       - "rabbitmq"
     depends_on:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
       - "rabbitmq"
     ports:
       - 4010:4010
 
   basel-integration-gateway:
     build: basel-integration-gateway
+    env_file:
+      - docker-compose.dev.env    
     environment:
-      - CONFIG_SERVICE_PASSWORD=111
-      - BASEL_CONFIG_HOST=basel-config
-      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
-      - BASEL_RABBITMQ_HOST=rabbitmq
+      - BASEL_INTAGRATION_BRD_JDBC_URL=jdbc:sqlserver://192.168.12.135;databaseName=SBespalov;
+      - BASEL_INTAGRATION_BRD_JDBC_USER=sbespalov
+      - BASEL_INTAGRATION_BRD_JDBC_PASSWORD=12345
+      - BASEL_INTAGRATION_BRD_STORAGE_FOLDER=/app/storage
     links:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
       - "rabbitmq"
     depends_on:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
       - "rabbitmq"
+    volumes:
+      - /home/sbespalov/projects/basel-msa/basel-integration-gateway/target/bookFixmlTmpStorage:/app/storage
     ports:
       - 4015:4015
 
   basel-service-recalculation:
     build: basel-service-recalculation
-    environment:
-      - CONFIG_SERVICE_PASSWORD=111
-      - BASEL_CONFIG_HOST=basel-config
-      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
-      - BASEL_RABBITMQ_HOST=rabbitmq
+    env_file:
+      - docker-compose.dev.env
     links:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
       - "rabbitmq"
     depends_on:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
+      - "rabbitmq"
     ports:
       - 4020:4020
 
   basel-service-brd:
     build: basel-service-brd
+    env_file:
+      - docker-compose.dev.env    
     environment:
-      - CONFIG_SERVICE_PASSWORD=111
-      - BASEL_CONFIG_HOST=basel-config
-      - BASEL_SERVICE_REGISTRY_HOST=basel-service-registry
-      - BASEL_RABBITMQ_HOST=rabbitmq
+      - BASEL_SERVICE_BRD_JDBC_URL=jdbc:sqlserver://192.168.12.135;databaseName=SBespalov;
+      - BASEL_SERVICE_BRD_JDBC_USER=sbespalov
+      - BASEL_SERVICE_BRD_JDBC_PASSWORD=12345
     links:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
       - "rabbitmq"
     depends_on:
       - "basel-config"
-      - "basel-service-registry"
+      - "basel-service-registry"      
+      - "rabbitmq"
     ports:
       - 4030:4030
 
   basel-service-monitoring:
     build: basel-service-monitoring
-    environment:
-      - CONFIG_SERVICE_PASSWORD=111
-      - BASEL_CONFIG_HOST=basel-config
-      - BASEL_RABBITMQ_HOST=rabbitmq
+    env_file:
+      - docker-compose.dev.env    
     links:
       - "basel-config"
-      - "rabbitmq"      
+      - "basel-service-registry"      
+      - "rabbitmq"
     depends_on:
-      - "basel-config"          
+      - "basel-config"
+      - "basel-service-registry"      
+      - "rabbitmq"
     ports:
       - 9000:8080
-      - 8989:8989
+      - 8989:8989      
