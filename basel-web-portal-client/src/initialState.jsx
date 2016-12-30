@@ -11,7 +11,14 @@ const getInitialState = function() {
                 filter: {}
             }
 
+        }),
+        book: Immutable.fromJS( {
+            bookList: {
+                filter: {}
+            }
+
         })
+        
     };
 
     var security = sessionStorage.getItem( 'security' );

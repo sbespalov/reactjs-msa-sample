@@ -3,18 +3,18 @@ package ru.sbrf.basel.service.brd.api.dto;
 public class BslBook
 {
 
-    private String code;
+    private String bookCode;
     private String sourceSystem;
-    private String type;
+    private String bookType;
 
-    public String getCode()
+    public String getBookCode()
     {
-        return code;
+        return bookCode;
     }
 
-    public void setCode(String code)
+    public void setBookCode(String code)
     {
-        this.code = code;
+        this.bookCode = code;
     }
 
     public String getSourceSystem()
@@ -27,14 +27,14 @@ public class BslBook
         this.sourceSystem = sourceSystem;
     }
 
-    public String getType()
+    public String getBookType()
     {
-        return type;
+        return bookType;
     }
 
-    public void setType(String type)
+    public void setBookType(String type)
     {
-        this.type = type;
+        this.bookType = type;
     }
 
 }

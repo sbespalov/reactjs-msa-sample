@@ -88,28 +88,59 @@ public class BrdConfiguration
         return result;
     }
 
+    /**
+     * Описание основного процесса загрузки "Буков" <br>
+     * <br>
+     * <b>Step1:</b> выборка пачки FIXML из таблицы (запрос выполняется с заданной переодичностью) <br>
+     * <b>Step2:</b> разделение результатов выборки на отдельные FIXML документы <br>
+     * <b>Step3:</b> запись FIXML во временный буфферный файл <br>
+     * <b>Step4:</b> разделение потоков <br>
+     * &emsp;<b>Step 4.1:</b> отмечаем FIXML документ в буфферной таблице как обработанный <br>
+     * &emsp;<b>Step 4.2:</b> запускаем параллельный парсинг и обработку пачек Буков <br>
+     * &emsp;&emsp;<b>Step 4.2.1:</b> Формирование задачи для параллельной обработки пачек "Буков" <br>
+     * &emsp;&emsp;<b>Step 4.2.2:</b> Запуск задачи для параллельной обработки пачек "Буков"
+     * 
+     * 
+     * @return
+     * @throws IOException
+     */
     @Bean
     public IntegrationFlow brdImportFlow()
         throws IOException
     {
-        return IntegrationFlows.from(bookFxmlPollingChannelAdapter(),
+        return IntegrationFlows.from(// Step1
+                                     bookFxmlPollingChannelAdapter(),
                                      e -> e.poller(Pollers.fixedRate(1000).maxMessagesPerPoll(10)))
                                .channel(new DirectChannel())
+                               // Step2
                                .split(List.class, s -> this.extractBookFixmlItems(s))
                                .channel(new DirectChannel())
+                               // Step3
                                .handle(fileWritingMessageHandler())
-                               .publishSubscribeChannel(s -> s.subscribe(f -> f.handle(bookFxmlBooferOutboundGateway()))
-                                                              .subscribe(f -> f.transform(this::bookFixmlMessageToBookJobRequest)
+                               // Step4
+                               .publishSubscribeChannel(s -> s.subscribe(// Step 4.1
+                                                                         f -> f.handle(bookFxmlBooferOutboundGateway()))
+                                                              .subscribe(// Step 4.2
+                                                                         f -> f.transform(// Step 4.2.1
+                                                                                          this::bookFixmlMessageToBookJobRequest)
                                                                                .channel(new DirectChannel())
+                                                                               // Step 4.2.2
                                                                                .handle(bookProcessingGateway())
                                                                                .channel("nullChannel")))
                                .get();
     }
 
+    /**
+     * Описание процесса завершения загрузки Буков <br>
+     * <b>Step1:</b> Удаление временных буфферных FIXML файлов
+     * 
+     * @return
+     */
     @Bean
     public IntegrationFlow brdFixmlParseCompleateFlow()
     {
         return IntegrationFlows.from(bookFixmlParseCompleateOuputChannel())
+                               // Step1
                                .handle(m -> this.bookFixmlFileDelete(m))
                                .get();
     }

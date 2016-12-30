@@ -99,7 +99,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>basel-gateway</finalName>
+					<finalName>basel-integration-gateway</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

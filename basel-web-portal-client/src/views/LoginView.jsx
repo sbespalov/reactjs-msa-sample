@@ -41,7 +41,7 @@ class LoginViewComponent extends React.Component {
                     </rb.FormGroup>
                     <rb.FormGroup>
                         <rb.Col smOffset={2} sm={10} onClick={( eventKey ) => { this.handleLogin( this.refs.loginForm.getValue() ) } }>
-                            <rb.Button>
+                            <rb.Button bsStyle="primary">
                                 Sign in
                             </rb.Button>
                         </rb.Col>

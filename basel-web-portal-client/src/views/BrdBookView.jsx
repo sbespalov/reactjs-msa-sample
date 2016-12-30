@@ -6,59 +6,54 @@ import "jquery-loading/jquery.loading";
 import "jquery-loading/jquery.loading.css";
 import "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js";
 import "bootstrap-datetimepicker/css/bootstrap-datetimepicker.css";
-//import "eonasdan-bootstrap-datetimepicker";
-import {actionCreators} from 'reducers/securityRecalculateHelper';
-import RecalculationFilter from 'components/recalculation/RecalculationFilter';
+import {actionCreators} from 'reducers/bookHelper';
+import BookFilter from 'components/brd/BookFilter';
 import {observableFromStore} from 'reduxStoreObserver';
 
-class SecurityRecalculateViewComponent extends React.Component {
+class BrdBookViewComponent extends React.Component {
 
     constructor( props, context ) {
         super( props, context );
-        console.log( '#Constructor' );
         this.handlePageSelect = this.handlePageSelect.bind( this );
         this.handleShowFilterSettings = this.handleShowFilterSettings.bind( this );
     }
 
     componentDidMount() {
-        console.log( '#Mount' );
-        $( this.getRecalculateResultTableElement() ).loading( { zIndex: 5 });
+        $( this.getTableElement() ).loading( { zIndex: 5 });
         if ( this.getIsLoading() ) {
-            $( this.getRecalculateResultTableElement() ).loading( 'start' );
+            $( this.getTableElement() ).loading( 'start' );
         } else if ( this.getIsFailed() ) {
-            $( this.getRecalculateResultTableElement() ).loading( {
+            $( this.getTableElement() ).loading( {
                 message: 'Failed to load...'
             });
         }
-        this.props.remoteFindRecalculationResultList( this.props.filterValue );
+        this.props.remoteFindList( this.props.filterValue );
     }
 
     componentWillUnmount() {
-        console.log( '#UnMount' );
-        $( this.getRecalculateResultTableElement() ).loading( 'stop' );
-        $( this.getRecalculateResultTableElement() ).loading( 'destroy' );
+        $( this.getTableElement() ).loading( 'stop' );
+        $( this.getTableElement() ).loading( 'destroy' );
     }
 
     componentDidUpdate() {
-        console.log( '#Update' );
         if ( this.getIsLoading() ) {
-            $( this.getRecalculateResultTableElement() ).loading( 'start' );
+            $( this.getTableElement() ).loading( 'start' );
         } else if ( this.getIsFailed() ) {
-            $( this.getRecalculateResultTableElement() ).loading( 'stop' );
-            $( this.getRecalculateResultTableElement() ).loading( 'destroy' );
-            $( this.getRecalculateResultTableElement() ).loading( {
+            $( this.getTableElement() ).loading( 'stop' );
+            $( this.getTableElement() ).loading( 'destroy' );
+            $( this.getTableElement() ).loading( {
                 message: 'Failed to load...'
             });
         } else {
-            $( this.getRecalculateResultTableElement() ).loading( 'stop' );
+            $( this.getTableElement() ).loading( 'stop' );
         }
     }
 
-    getRecalculateResultTableElement() {
-        return ReactDOM.findDOMNode( this.refs.recalculateResultTableContainer );
+    getTableElement() {
+        return ReactDOM.findDOMNode( this.refs.tableContainer );
     }
 
-    getRecalculateResultData() {
+    getData() {
         return this.props.data || [];
     }
 
@@ -79,7 +74,7 @@ class SecurityRecalculateViewComponent extends React.Component {
     }
 
     handlePageSelect( eventKey ) {
-        this.props.remoteFindRecalculationResultList( {
+        this.props.remoteFindList( {
             pageRequest: {
                 pageNumber: eventKey
             }
@@ -89,40 +84,38 @@ class SecurityRecalculateViewComponent extends React.Component {
     }
 
     handleCloseFilterSettings( filterValue ) {
-        this.props.applyFindRecalculationResultListFilter( filterValue );
+        this.props.applyFindFilter( filterValue );
     }
 
     handleShowFilterSettings(){
-        this.refs.resultListFilterDetailForm.setValue( this.props.filterValue );        
+        this.refs.filterDetailForm.setValue( this.props.filterValue );        
     }
     
     render() {
-        var resultListFilterDetailForm = <RecalculationFilter ref="resultListFilterDetailForm"/>;
+        var filterDetailForm = <BookFilter ref="filterDetailForm"/>;
     
         return <div>
-            <PageHeader>Security Recalculate
-                <Button bsStyle="link" onClick={this.props.toggleFindRecalculationResultListFilter}>
+            <PageHeader>Book
+                <Button bsStyle="link" onClick={this.props.toggleFindFilter}>
                     <Glyphicon glyph="search"/>
                 </Button>
             </PageHeader>
-            <div ref="recalculateResultTableContainer">
-                <Table responsive striped condensed hover ref="recalculateResultTable">
+            <div ref="tableContainer">
+                <Table responsive striped condensed hover>
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Security</th>
-                            <th>Bid Calculate Detail</th>
-                            <th>Ask Calculate Detail</th>
+                            <th>Code</th>
+                            <th>Source System</th>
+                            <th>Book Type</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            this.getRecalculateResultData().map(( row ) => {
+                            this.getData().map(( row ) => {
                                 return <tr>
-                                    <td>{row.get( 'date' ).toString() }</td>
-                                    <td>{row.get( 'security' ) }</td>
-                                    <td>{row.get( 'bidCalculateResult' ) }</td>
-                                    <td>{row.get( 'askCalculateDetail' ) }</td>
+                                    <td>{row.get( 'bookCode' ).toString() }</td>
+                                    <td>{row.get( 'sourceSystem' ) }</td>
+                                    <td>{row.get( 'bookType' ) }</td>
                                 </tr>;
                             })
                         }
@@ -150,10 +143,10 @@ class SecurityRecalculateViewComponent extends React.Component {
                     <Modal.Title>Filter</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {resultListFilterDetailForm}
+                    {filterDetailForm}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="primary" onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.resultListFilterDetailForm.getValue() ) } }>Ok</Button>
+                    <Button bsStyle="primary" onClick={( eventKey ) => { this.handleCloseFilterSettings( this.refs.filterDetailForm.getValue() ) } }>Ok</Button>
                     <Button onClick={( eventKey ) => { this.handleCloseFilterSettings() } }>Cancel</Button>
                 </Modal.Footer>
             </Modal>
@@ -164,20 +157,20 @@ class SecurityRecalculateViewComponent extends React.Component {
 }
 
 function mapStateToProps( state ) {
-    state = state.securityRecalculate;
+    state = state.book;
     return {
-        data: state.getIn( ['recalculationResultList', 'data'] ),
-        pageSize: state.getIn( ['recalculationResultList', 'pageSize'] ),
-        pageNumber: state.getIn( ['recalculationResultList', 'pageNumber'] ),
-        totalCount: state.getIn( ['recalculationResultList', 'totalCount'] ),
-        loading: state.getIn( ['recalculationResultList', 'loading'] ),
-        failed: state.getIn( ['recalculationResultList', 'failed'] ),
+        data: state.getIn( ['bookList', 'data'] ),
+        pageSize: state.getIn( ['bookList', 'pageSize'] ),
+        pageNumber: state.getIn( ['bookList', 'pageNumber'] ),
+        totalCount: state.getIn( ['bookList', 'totalCount'] ),
+        loading: state.getIn( ['bookList', 'loading'] ),
+        failed: state.getIn( ['bookList', 'failed'] ),
         showFilterSettings: state.get( 'showFilterSettings' ),
-        filterValue: state.getIn( ['recalculationResultList', 'filter'] ).toJS()
+        filterValue: state.getIn( ['bookList', 'filter'] ).toJS()
     };
 }
 
-export const SecurityRecalculateView = connect(
+export const BrdBookView = connect(
     mapStateToProps,
     actionCreators
-)( SecurityRecalculateViewComponent );
+)( BrdBookViewComponent );

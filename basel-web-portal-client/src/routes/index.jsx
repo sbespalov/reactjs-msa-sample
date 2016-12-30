@@ -8,7 +8,8 @@ export default <Route path="/" component={Main}>
     <Route path="/login" component={page.LoginView} />
     <Route path="/logout" component={page.LogoutView} />
     <Route path="/monitoring" component={page.MonitoringView} />
-    <Route path="/security-recalculate" component={page.SecurityRecalculateView} />
+    <Route path="/security-recalculate" component={page.SecurityRecalculateView} />" +
+    <Route path="/book" component={page.BrdBookView} />
     <Route path="/reports" component={page.ReportsView} />
     <Route path="/referencies" component={page.ReferenciesView} />
 </Route>;

@@ -7,6 +7,9 @@ basel:
 
 spring:
   jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2008Dialect
     show-sql: true
     hibernate:
       naming-strategy: org.hibernate.cfg.DefaultNamingStrategy

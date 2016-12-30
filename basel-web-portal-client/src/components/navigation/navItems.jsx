@@ -22,8 +22,8 @@ export default [
     },
     {
         id: '2',
-        title: 'Report',
-        location: '/reports'
+        title: 'Book',
+        location: '/book'
     }, {
         id: '4',
         title: 'Item 4',

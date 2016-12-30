@@ -17,13 +17,20 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
-  
     service-recalculation:
         path: /recalculation/**
         prefix: /recalculation
         serviceId: basel-service-recalculation
         stripPrefix: false
         sensitiveHeaders:
+
+    service-brd:
+        path: /book/**
+        prefix: /book
+        serviceId: basel-service-brd
+        stripPrefix: false
+        sensitiveHeaders:
+
 
 server:
   port: 4010

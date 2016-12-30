@@ -24,14 +24,14 @@ public class BookBatchServiceController implements BookBatchServiceApi
     {
         for (BslBook bslBook : bslBookCreateRequest.getBookList())
         {
-            Book bookEntity = bookRepository.find(bslBook.getCode(), bslBook.getSourceSystem());
+            Book bookEntity = bookRepository.find(bslBook.getBookCode(), bslBook.getSourceSystem());
             if (bookEntity == null)
             {
                 bookEntity = new Book();
             }
 
-            bookEntity.setBookCode(bslBook.getCode());
-            bookEntity.setBookType(bslBook.getType());
+            bookEntity.setBookCode(bslBook.getBookCode());
+            bookEntity.setBookType(bslBook.getBookType());
             bookEntity.setSourceSystem(bslBook.getSourceSystem());
             bookRepository.save(bookEntity);
         }
