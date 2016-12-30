@@ -17,12 +17,12 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>
     Book find(@Param("bookCode") String bookCode,
               @Param("sourceSystem") String sourceSystem);
 
-    @Query(" select     " +
-            "   e       " +
-            "from       " +
-            "   Book e  " +
+    @Query(" select                                                                             " +
+            "   e                                                                               " +
+            "from                                                                               " +
+            "   Book e                                                                          " +
             "where (nullif(:bookCode,'%') is null or e.bookCode like :bookCode)                 " +
-            "       and (nullif(:bookType,'%') is null or e.bookType like :bookType)           " +
+            "       and (nullif(:bookType,'%') is null or e.bookType like :bookType)            " +
             "       and (nullif(:sourceSystem,'%') is null or e.sourceSystem like :sourceSystem)")
     Page<Book> findPage(@Param("bookCode") String bookCode,
                         @Param("bookType") String bookType,
